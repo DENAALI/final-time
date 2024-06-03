@@ -185,7 +185,7 @@ if (isset($_POST['major1'])) {
         echo "<td>" . $student_count . "</td>";
         echo "<td>";
         // if ($count > 0) {
-            echo "<button onclick='update(event," . $subject_id . ")' id='btnedit" . $subject_id . "' class='btn'>delete 1 section</button>";
+            echo "<button onclick='update(event," . $subject_id . ")' id='btnedit" . $subject_id . "' class='btn btn-primary ' style='' >delete 1 section</button>";
         // }
         echo "</td>";
         echo "</tr>";

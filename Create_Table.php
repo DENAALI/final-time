@@ -103,7 +103,7 @@ while ($row = $result->fetch_assoc()) {
 <form id="create" action="createtable.php" method="post">
 <input type="hidden" class="major2"    id="major2"   name="major5">
 <input type="hidden"  id="semester2" name="semester5">
-    <table cellpadding="0" style="width: 100%;" id="" cellspacing="0" border="0">
+    <table cellpadding="0" class="table table-bordered" style="width: 100%;" id="" cellspacing="0" border="0">
         <thead>
             <tr>
                 <th>Subject Number</th>
@@ -199,7 +199,7 @@ while ($row = $result->fetch_assoc()) {
        event.preventDefault();
    $.ajax({
                type: 'POST',
-               url: 'page/php/update.php',
+               url: 'php/update.php',
                data: {id1:id},
                success: function(response) {
                    // console.log(document.getElementById('count'+id).innerHTML.replace(""));

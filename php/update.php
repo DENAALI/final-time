@@ -1,5 +1,5 @@
 <?php
-require '../../connect.php';
+require '../connect.php';
 
 if (isset($_POST['id1'])) {
     $id = $_POST['id1'];
@@ -11,8 +11,8 @@ if (isset($_POST['id1'])) {
     $stmt->execute();
     $scedual_res = $stmt->get_result();
     $scedual_row = $scedual_res->fetch_assoc();
-    if($scedual_row['count']!=1){
-        echo $scedual_row['count'];
+    if($scedual_row['count']>=1){
+        // echo $scedual_row['count'];
     $scedual_select = "SELECT * FROM `schedule` WHERE subject_id = ?";
     $stmt = $conn->prepare($scedual_select);
     $stmt->bind_param("i", $id);
