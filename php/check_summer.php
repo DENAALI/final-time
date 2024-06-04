@@ -45,7 +45,7 @@ if($teacher!="" && $teacher!="non"){
 
 
 // تحقق من الشروط
-$sqlTeacherClasses = "SELECT * FROM summer WHERE teacher='$teacher' GROUP by course_name ";
+$sqlTeacherClasses = "SELECT * FROM summer WHERE teacher='$teacher'  ";
 $result = $conn->query($sqlTeacherClasses);
 
 $subject_count = 0;

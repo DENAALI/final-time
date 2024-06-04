@@ -60,11 +60,11 @@
     <i class="fas fa-fw fa-home"></i>
     <span>Halls</span></a>
 </li>
-<li class="nav-item">
+<!-- <li class="nav-item">
   <a class="nav-link" href="acpet_teacher.php">
   <i class="fa fa-check" aria-hidden="true"></i>
     <span>Acept Teacher</span></a>
-</li>
+</li> -->
 <li class="nav-item">
   <a class="nav-link" href="statstiac.php">
   <i class="fas fa-chart-bar"></i>
