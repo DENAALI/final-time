@@ -1,13 +1,10 @@
 <?php
 session_start();
-if ($_SESSION['teacher_id'] ==null)
-{
-  header('Location:login.php');
+if ($_SESSION['teacher_id'] == null) {
+    header('Location: login.php');
+    exit();
 }
 
-?>
-
-<?php
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('connect.php');
@@ -25,9 +22,6 @@ include('connect.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Choose Courses</title>
-    <?php 
-    session_start();
-    ?>
 </head>
 
 <body>
@@ -47,8 +41,6 @@ include('connect.php');
                     </thead>
                     <tbody>
                         <?php
-                  
-
                         $sql = "
                           SELECT 
                             s.subject_id,
