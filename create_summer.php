@@ -111,9 +111,10 @@ if (isset($_POST['major1'])) {
         $isLab = (strpos($row['course_name'], 'lab') !== false) || (strpos($row['course_name'], 'Lab') !== false);
        ?>
        <script>
-        console.log('<?php echo $isLab ?>');
+        // console.log('<?php echo $isLab ?>');
        </script>
        <?php
+       if(!$isLab)
         foreach ($teachers as $teacher_id => $teacher) {
             $max_subjects = getMaxSubjects($teacher['name']);
             if ($teacher['subjects'] <= $max_subjects) {
@@ -121,7 +122,7 @@ if (isset($_POST['major1'])) {
                     continue; // المواد العملية يمكن أن تُدرس فقط من قبل Mr أو Mrs
                 }
                 $can_assign = canAssignTeacher($teacher, $row['day'], $row['time'], $isLab,$time_);
-                if ($can_assign && $row['teacher'] == '' && subcount($conn, $teacher['name'])&&section_num($conn,$teacher['name'],$row['course_name'],$teacher)) {
+                if ($can_assign && $row['teacher'] == '' && subcount($conn, $teacher['name'])&&section_num($conn,$teacher['name'],$row['course_name'],$teacher,$teachers[$teacher_id]['subjects'])) {
                     $teachers[$teacher_id]['subjects'] += 1;
                     $teachers[$teacher_id]['classes'][] = ['sub_name'=>$row['course_name'],'day' => $row['day'], 'time' => $row['time'], 'isLab' => $isLab];
                     $assigned_teacher = $teacher['name'];
@@ -155,6 +156,7 @@ $teacher_result = $conn->query($sqlTeachers);
 while ($teacher_row = $teacher_result->fetch_assoc()) {
     echo "<option value'{$teacher_row['name']}' >{$teacher_row['name']}</option>";
 }
+
 echo"</select></td>";
 // echo"<td>$assigned_teacher</td>";
     
@@ -199,23 +201,8 @@ function canAssignTeacher($teacher, $day, $time, $isLab,$all_times) {
             if ($class_time_numeric['start'] <= $current_time['start'] && $class_time_numeric['end'] > $current_time['start']) {
                 return false; // تضارب في الأوقات
             }
-
-            if(!$isLab){
-                $index=array_search($time, $all_times);
-                if($index>0&&$index<8&&$index!=0){
-                    if($all_times[$index-1]==$time||$all_times[$index+1]==$time){
-                        
-                    }
-                }else if($index==0){
-                    if($all_times[$index+1]==$time){
-                        
-                    }
-                }
-            }
-
-
             if ($class_time_numeric['end'] == $current_time['start'] || ($class_time_numeric['end'] + $lecture_duration) == $current_time['start']) {
-                // $consecutive_count++;
+                $consecutive_count++;
             } else {
                 $consecutive_count = 0;
             }
@@ -227,32 +214,31 @@ function canAssignTeacher($teacher, $day, $time, $isLab,$all_times) {
     return true;
 }
 
-function section_num($conn,$techer_name,$corse_name,$teacher){
-    $sqlTeacherClasses = "SELECT *,count(section) as 'count' FROM summer WHERE teacher='$techer_name' and course_name='$corse_name' GROUP BY course_name";
+function section_num($conn,$techer_name,$corse_name,$teacher,$sub_count){
+    $sqlTeacherClasses = "SELECT * FROM summer WHERE teacher='$techer_name' ";
     $result = $conn->query($sqlTeacherClasses);
    $sections = $result->fetch_assoc();
    $max=getMaxSubjects($techer_name);
    if($sections!=null ){
-
-       if($max>=$sections['count']&&$sections['count']!=0){
-           return true;
-        }else{
-            return false;
-        }
+    if($result->num_rows>=$max){
+        return false;
+    }
+    }
+    if($sub_count>=$max){
+        return false;
     }
     $section_number=0;
    foreach ($teacher['classes'] as $class_time) {
-    if($class_time['sub_name']==$corse_name){
-        $section_number+=1;
-    }
+        if($class_time['sub_name']==$corse_name){
+            $section_number+=1;
+        }
    }
    if( $section_number>=2){
     return false;
    }else{
-    return true;
+   
    }
-
-
+   return true;
 }
 // التحقق من توفر الغرف
 function is_room_available($schedule, $room_name, $days, $time_slot) {
@@ -266,7 +252,7 @@ function is_room_available($schedule, $room_name, $days, $time_slot) {
 
 // التحقق من عدد المواد المدرسية
 function subcount($conn, $teacher) {
-    $sqlTeacherClasses = "SELECT * FROM summer WHERE teacher='$teacher' GROUP BY course_name";
+    $sqlTeacherClasses = "SELECT * FROM summer WHERE teacher='$teacher' ";
     $result = $conn->query($sqlTeacherClasses);
 
     $subject_count = 0;
