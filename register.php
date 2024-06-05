@@ -428,14 +428,32 @@ $(document).ready(function(){
                         $('#successModalUpdate').modal('show');
                     } else if (jsonResponse.action == 'add') { // Use else if instead of separate if statements
                         $('#successModal').modal('show');
+                        $.ajax({
+            url: 'send_email.php',
+            type: 'POST',
+            data: { email: jsonResponse.email, otp: jsonResponse.value,name:jsonResponse.name},
+            success: function(response) {
+              alert("dddddddddddddddddddd");
+                // $('#confirmDeleteModal').modal('hide');
+                // $('#row-' + deleteId).remove();
+                // $('#successModalDelete').modal('show');
+                // refreshTable();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
                     }
                     refreshTable();
                 } else {
+                  // alert(jsonResponse.message);
                     console.error("Error adding/updating teacher: " + jsonResponse.message);
                 }
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText);
+              // alert(jsonResponse.message);
+
+                // console.error(xhr.responseText);
             }
         });
     });

@@ -26,10 +26,10 @@ $type = $_POST['type-user'] ?? null;
 //     // استخدام الهاش السابق لكلمة المرور
 //     $hashedPassword = $password;
 // }
-
+$otp = rand(100000,999999);
 $action = isset($teacherId) && !empty($teacherId) ? 'update' : 'add';
 
-if ($teacherName && $major && $active && $dateFrom && $dateTo && $email && $password && $degree && $type) {
+if ($teacherName && $major && $active && $dateFrom && $dateTo && $email && $degree && $type) {
     // Perform additional validation here if needed
     
     if ($action == 'update') {
@@ -48,17 +48,17 @@ if ($teacherName && $major && $active && $dateFrom && $dateTo && $email && $pass
         $stmt->bind_param("sssisssssi", $teacherName, $email, $password, $major, $active, $dateFrom, $dateTo, $degree, $type, $teacherId);
 
         if ($stmt->execute()) {
-            echo json_encode(array('success' => true,'action' => 'update'));
+            echo json_encode(array('success' => true,'action' => 'update','value' => $otp));
         } else {
             echo json_encode(array('success' => false, 'message' => 'Failed to update teacher.'));
         }
 
     } elseif ($action == 'add') {
         $stmt = $conn->prepare("INSERT INTO teacher (name, email, password, depar_num, active, date_from, date_to, degree, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssisssss", $teacherName, $email, $password, $major, $active, $dateFrom, $dateTo, $degree, $type);
+        $stmt->bind_param("sssisssss", $teacherName, $email, $otp, $major, $active, $dateFrom, $dateTo, $degree, $type);
 
         if ($stmt->execute()) {
-            echo json_encode(array('success' => true,'action' => 'add'));
+            echo json_encode(array('success' => true,'action' => 'add','value' => $otp,'email' => $email,'name' => $teacherName));
         } else {
             echo json_encode(array('success' => false, 'message' => 'Failed to add teacher.'));
         }
