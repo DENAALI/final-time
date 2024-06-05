@@ -87,7 +87,7 @@ while ($row = $result->fetch_assoc()) {
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" id="myComboBox">
               <label for="active">Active</label>
               <select id="active" name="active" class="form-control" required>
                 <option value="yes">Yes</option>
@@ -525,6 +525,26 @@ $(document).ready(function(){
     });
 })
 </script>
+<script>
+          
+        var value=  document.getElementById('active').value;
+        if (value === 'yes') {
+                dateTo.disabled = true;
+                dateFrom.disabled = true;
+            } 
+        document.getElementById('active').addEventListener('change', function() {
+          var dateTo = document.getElementById('dateTo');
+              var dateFrom = document.getElementById('dateFrom');
+            if (this.value === 'yes') {
+                dateTo.disabled = true;
+                dateFrom.disabled = true;
+            } else
+            {
+              dateTo.disabled = false;
+                dateFrom.disabled = false;
+            }
+        });
+    </script>
 <?php
 include('includes/scripts.php');
 include('includes/footer.php');
