@@ -22,28 +22,33 @@ include('connect.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Choose Courses</title>
+    <style>
+td, th {
+  text-align: center;
+}
+        </style>
 </head>
 
 <body>
     <div class="content">
         <div class="container">
             <h2 class="mb-5">Choose Courses</h2>
-            <div class="table-responsive custom-table-responsive">
-                <table class="table custom-table">
+            <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col">ID</th>
+
                             <th scope="col">Subject Name</th>
-                            <th scope="col">Number of Students</th>
-                            <th scope="col">Capacity</th>
-                            <th scope="col">Sections</th>
+                            <th scope="col">Cheack</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $sql = "
                           SELECT 
-                            s.subject_id,
+                            s.subject_id AS subject_id,
                             s.name AS subject_name,
                             st.num_of_study,
                             s.Capacity,
@@ -59,16 +64,16 @@ include('connect.php');
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                    <th scope="row">
-                                        <label class="control control--checkbox">
-                                            <input type="checkbox" name="select[]" value="' . htmlspecialchars($row['subject_name']) . '" />
-                                            <div class="control__indicator"></div>
-                                        </label>
-                                    </th>
+                                
+                                    <td>' . htmlspecialchars($row['subject_id']) . '</td>
                                     <td>' . htmlspecialchars($row['subject_name']) . '</td>
-                                    <td>' . htmlspecialchars($row['num_of_study']) . '</td>
-                                    <td>' . htmlspecialchars($row['Capacity']) . '</td>
-                                    <td>' . htmlspecialchars($row['sections']) . '</td>
+
+                                    <th scope="row">
+                                    <label class="control control--checkbox">
+                                        <input type="checkbox" name="select[]" value="' . htmlspecialchars($row['subject_name']) . '" />
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </th>
                                 </tr>
                                 <tr class="spacer">
                                     <td colspan="100"></td>

@@ -12,8 +12,6 @@ include('includes/header.php');
 include('includes/navbar.php'); 
 ?>
 
-
-
 <style>
   /* Custom CSS for form elements in the modal */
 .modal-content .form-group {
@@ -23,7 +21,9 @@ include('includes/navbar.php');
 .modal-content label {
     font-weight: bold;
 }
-
+td, th {
+  text-align: center;
+}
   </style>
   <?php
 include_once("connect.php");

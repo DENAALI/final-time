@@ -23,7 +23,9 @@ include('includes/navbar.php');
 .modal-content label {
     font-weight: bold;
 }
-
+td, th {
+  text-align: center;
+}
   </style>
   <?php
 include_once("connect.php");
