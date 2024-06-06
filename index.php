@@ -101,6 +101,41 @@ section .air.air4{
 
     user-select: none;
 }
+.patterns {
+  height: 100vh;
+}
+
+
+
+svg text {
+  font-family: Lora;
+  letter-spacing: 10px;
+  stroke: #ffa5d8;
+  font-size: 150px;
+  font-weight: 700;
+  stroke-width: 3;
+ 
+  animation: textAnimate 5s infinite alternate;
+  
+}
+
+@keyframes textAnimate {
+  0% {
+    stroke-dasharray: 0 50%;
+    stroke-dashoffset:  20%;
+    fill:hsl(189, 68%, 75%)
+
+  }
+  
+  100% {
+    stroke-dasharray: 50% 0;
+    stroke-dashoffstet: -20%;
+    fill: hsla(189, 68%, 75%,0%)
+  }
+  
+}
+
+
 
 </style>
 <script src= "js/countup.min.js"></script>
@@ -251,7 +286,30 @@ $type = $_SESSION['type'];
  
   </div>
   <section>
-  <div id="container">
+    
+  <div class="patterns">
+  <svg width="100%" height="100%">
+    <defs>
+      <pattern id="polka-dots" x="0" y="0"                    width="100" height="100"
+               patternUnits="userSpaceOnUse">
+        <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
+      </pattern>  
+        <style>
+     @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+   </style>
+      
+    </defs>
+              
+    <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
+     
+    
+   
+ <text x="50%" y="60%"  text-anchor="middle"  >
+   TTSFC
+ </text>
+ </svg>
+</div>
+  <!-- <div id="container">
     <span id="text1"></span>
     <span id="text2"></span>
 </div>
@@ -265,7 +323,7 @@ $type = $_SESSION['type'];
 									0 0 0 255 -140" />
         </filter>
     </defs>
-</svg>
+</svg> -->
   <div class='air air1'></div>
   <div class='air air2'></div>
   <div class='air air3'></div>
@@ -275,7 +333,7 @@ $type = $_SESSION['type'];
 
 
 
-
+ 
   <script>
     // get the element to animate
     // var element = document.getElementById('count-stats');
