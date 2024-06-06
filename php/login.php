@@ -7,7 +7,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $password = $_POST['password'];
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT id, password FROM teacher WHERE email = ? and password = ?");
+    $stmt = $conn->prepare("SELECT id, password ,type FROM teacher WHERE email = ? and password = ?");
     $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -15,6 +15,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     if ($row) {
         $_SESSION['teacher_id'] = $row['id'];
+        $_SESSION['type'] = $row['type'];
         echo json_encode(array("success" => true));
     } else {
         echo json_encode(array("success" => false, "message" => "Invalid email or password."));

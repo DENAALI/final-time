@@ -8,9 +8,12 @@
   </div>
   <div class="sidebar-brand-text mx-3">TTSFC <sup>Mutah</sup></div>
 </a>
-
+<?php
+$type = $_SESSION['type'];
+?>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
+<?php if ($type == 'admin') { ?>
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
@@ -18,7 +21,7 @@
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span></a>
 </li>
-
+<?php } ?>
 <!-- Divider -->
 <hr class="sidebar-divider">
 
@@ -43,40 +46,55 @@
 </li> -->
 
 
-
-
+<?php if ($type == 'Teacher') { ?>
 <li class="nav-item">
-  <a class="nav-link" href="register.php">
-    <i class="fas fa-fw fa-chalkboard-teacher"></i>
-    <span>Teachers</span></a>
+  <a class="nav-link" href="acpet_teacher.php">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    <span>Choose Courses</span>
+  </a>
 </li>
-<li class="nav-item">
+<?php } ?>
+
+<?php if ($type == 'admin') { ?>
+
+  <li class="nav-item">
   <a class="nav-link" href="courses.php">
     <i class="fas fa-fw fa-plus"></i>
-    <span>Courses</span></a>
+    <span>Courses</span>
+  </a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="hall.php">
     <i class="fas fa-fw fa-home"></i>
-    <span>Halls</span></a>
+    <span>Halls</span>
+  </a>
 </li>
+
 <li class="nav-item">
-  <a class="nav-link" href="acpet_teacher.php">
-  <i class="fa fa-check" aria-hidden="true"></i>
-    <span>Choose Courses</span></a>
+  <a class="nav-link" href="register.php">
+    <i class="fas fa-fw fa-chalkboard-teacher"></i>
+    <span>Teachers</span>
+  </a>
 </li>
+
+  <?php } ?>
+
+
+<?php if ($type == 'head') { ?>
 <li class="nav-item">
   <a class="nav-link" href="statstiac.php">
-  <i class="fas fa-chart-bar"></i>
-    <span>Add Statstiac</span></a>
+    <i class="fas fa-chart-bar"></i>
+    <span>Add Statistics</span>
+  </a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="Create_Table.php">
-  <i class="fa fa-calendar" aria-hidden="true"></i>
-    <span>Create table</span></a>
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    <span>Create Table</span>
+  </a>
 </li>
 
-
+<?php } ?>
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <!-- <li class="nav-item">
