@@ -18,7 +18,7 @@ section{
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #3586ff;
+  background: #512da8;
   overflow: hidden;
 }
 section .air{
@@ -110,10 +110,10 @@ section .air.air4{
 svg text {
   font-family: Lora;
   letter-spacing: 10px;
-  stroke: #ffa5d8;
-  font-size: 150px;
-  font-weight: 700;
-  stroke-width: 3;
+  stroke: #e1edff;
+  font-size: 100px;
+  font-weight: 500;
+  stroke-width: 2;
  
   animation: textAnimate 5s infinite alternate;
   
@@ -292,7 +292,7 @@ $type = $_SESSION['type'];
     <defs>
       <pattern id="polka-dots" x="0" y="0"                    width="100" height="100"
                patternUnits="userSpaceOnUse">
-        <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
+        <!-- <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle> -->
       </pattern>  
         <style>
      @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
@@ -306,6 +306,8 @@ $type = $_SESSION['type'];
    
  <text x="50%" y="60%"  text-anchor="middle"  >
    TTSFC
+   MUTAH
+  
  </text>
  </svg>
 </div>
