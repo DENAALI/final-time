@@ -12,7 +12,7 @@ include('includes/navbar.php');
 include('connect.php');
 ?>
 
-
+<script src= "js/countup.min.js"></script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -67,7 +67,7 @@ include('connect.php');
                $sql="SELECT COUNT(*) FROM teacher WHERE type='admin'";
                $result=mysqli_query($conn,$sql);
                $row=mysqli_fetch_array($result);
-               echo $row[0]; 
+               echo ' <h5 class="text-gradient text-info" id="state3" countTo='.$row[0].'>0</h5>'; 
                
                
                ?></div>
@@ -90,7 +90,7 @@ include('connect.php');
                $sql="SELECT COUNT(*) FROM teacher WHERE type='teacher'";
                $result=mysqli_query($conn,$sql);
                $row=mysqli_fetch_array($result);
-               echo $row[0]; 
+               echo ' <h5 class="text-gradient text-info" id="state1" countTo='.$row[0].'>0</h5>'; 
                
                
                ?></div>
@@ -109,11 +109,10 @@ include('connect.php');
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Head Department </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800"> <?php
-               
                $sql="SELECT COUNT(*) FROM teacher WHERE type='head'";
                $result=mysqli_query($conn,$sql);
                $row=mysqli_fetch_array($result);
-               echo $row[0]; 
+               echo ' <h5 class="text-gradient text-info" id="state2" countTo='.$row[0].'>0</h5>'; 
                
                
                ?></div>
@@ -162,6 +161,89 @@ include('connect.php');
 
 
 
+  <script>
+    // get the element to animate
+    // var element = document.getElementById('count-stats');
+    // var elementHeight = element.clientHeight;
+
+    // listen for scroll event and call animate function
+
+    document.addEventListener("DOMContentLoaded", animate);
+
+    // check if element is in view
+    // function inView() {
+    //   // get window height
+    //   var windowHeight = window.innerHeight;
+    //   // get number of pixels that the document is scrolled
+    //   var scrollY = window.scrollY || window.pageYOffset;
+    //   // get current scroll position (distance from the top of the page to the bottom of the current viewport)
+    //   var scrollPosition = scrollY + windowHeight;
+    //   // get element position (distance from the top of the page to the bottom of the element)
+    //   var elementPosition = element.getBoundingClientRect().top + scrollY + elementHeight;
+
+    //   // is scroll position greater than element position? (is element in view?)
+    //   if (scrollPosition > elementPosition) {
+    //     return true;
+    //   }
+
+    //   return false;
+    // }
+
+    var animateComplete = true;
+    // animate element when it is in view
+    function animate() {
+
+      // is element in view?
+      // if (inView()) {
+        // if (!animateComplete) {
+          if (document.getElementById('state1')) {
+            const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+            if (!countUp.error) {
+              countUp.start();
+            } else {
+              console.error(countUp.error);
+            }
+          }
+          if (document.getElementById('state2')) {
+            const countUp2 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+            if (!countUp2.error) {
+              countUp2.start();
+            } else {
+              console.error(countUp2.error);
+            }
+          }
+          if (document.getElementById('state3')) {
+            const countUp3 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+            if (!countUp3.error) {
+              countUp3.start();
+            } else {
+              console.error(countUp3.error);
+            };
+          }
+          if (document.getElementById('state4')) {
+            const countUp4 = new CountUp('state4', document.getElementById("state4").getAttribute("countTo"));
+            if (!countUp4.error) {
+              countUp4.start();
+            } else {
+              console.error(countUp4.error);
+            };
+          }
+          animateComplete = false;
+        }
+    
+    // }
+
+    if (document.getElementById('typed')) {
+      var typed = new Typed("#typed", {
+        stringsElement: '#typed-strings',
+        typeSpeed: 90,
+        backSpeed: 90,
+        backDelay: 200,
+        startDelay: 500,
+        loop: true
+      });
+    }
+  </script>
 
 
 

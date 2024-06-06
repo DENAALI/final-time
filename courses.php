@@ -22,6 +22,11 @@ include('includes/navbar.php');
     font-weight: bold;
 }
 
+td, th {
+  text-align: center;
+
+}
+
   </style>
   <?php
 include_once("connect.php");

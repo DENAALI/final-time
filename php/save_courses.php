@@ -7,7 +7,7 @@ if (!isset($_SESSION['teacher_id'])) {
 }
 
 if (isset($_POST['select']) && is_array($_POST['select'])) {
-    include '../../connect.php';
+    include '../connect.php';
 
     $teacher_id = $_SESSION['teacher_id'];
     $values = array();
@@ -23,8 +23,8 @@ if (isset($_POST['select']) && is_array($_POST['select'])) {
         }
     }
 
-    if (!empty($values)) {
-        $insert_query = "INSERT INTO teaches (teacher_id, subject_id, state) VALUES " . implode(", ", $values);
+    if (!empty($values)) {   
+        $insert_query = "INSERT INTO tetches (techer_id, subject_id, state) VALUES " . implode(", ", $values);
         if (mysqli_query($conn, $insert_query)) {
             echo "Records added successfully";
         } else {
