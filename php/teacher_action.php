@@ -29,7 +29,7 @@ $type = $_POST['type-user'] ?? null;
 $otp = rand(100000,999999);
 $action = isset($teacherId) && !empty($teacherId) ? 'update' : 'add';
 
-if ($teacherName && $major && $active && $dateFrom && $dateTo && $email && $degree && $type) {
+if ($teacherName && $major && $active &&  $email && $degree && $type) {
     // Perform additional validation here if needed
     
     if ($action == 'update') {
