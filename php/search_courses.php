@@ -1,17 +1,42 @@
 <?php
 include_once(__DIR__ . '/../connect.php');
 
+// Function to get major name by ID
+function get_name_major_by_id($conn, $id)
+{
+    $sql = "SELECT major_name FROM major WHERE id = $id";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['major_name'];
+    }
+    return "Unknown"; // Return a default value if major not found
+}
+
+// Get search term
 $search = isset($_POST['search']) ? $_POST['search'] : '';
 
-$sql = "SELECT * FROM subjects WHERE name LIKE '%$search%' OR type_name LIKE '%$search%' OR year LIKE '%$search%' OR semester LIKE '%$search%' OR major_id LIKE '%$search%' OR subject_id LIKE '%$search%' OR pre_sub_num LIKE '%$search%' OR Capacity LIKE '%$search%'";
+// Search query
+$sql = "SELECT * FROM subjects WHERE 
+        name LIKE '%$search%' OR 
+        type_name LIKE '%$search%' OR 
+        year LIKE '%$search%' OR 
+        semester LIKE '%$search%' OR 
+        major_id LIKE '%$search%' OR 
+        subject_id LIKE '%$search%' OR 
+        pre_sub_num LIKE '%$search%' OR 
+        Capacity LIKE '%$search%'";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
+        // $name_major = get_name_major_by_id($conn, $row['major_id']);
+        // <td>' . htmlspecialchars($name_major) . '</td>
         echo '<tr id="row-' . htmlspecialchars($row['id']) . '">
             <td>' . htmlspecialchars($row['year']) . '</td>
             <td>' . htmlspecialchars($row['semester']) . '</td>
-            <td>' . htmlspecialchars($row['major_id']) . '</td>
+           
             <td>' . htmlspecialchars($row['subject_id']) . '</td>
             <td>' . htmlspecialchars($row['pre_sub_num']) . '</td>
             <td>' . htmlspecialchars($row['name']) . '</td>
