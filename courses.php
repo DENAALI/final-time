@@ -294,7 +294,7 @@ while ($row = $result->fetch_assoc()) {
       <tr>
       <th scope="col">Year</th>
                             <th scope="col">Semester</th>
-                            <th scope="col">Major ID</th>
+                            <!-- <th scope="col">Major ID</th> -->
                             <th scope="col">Subject ID</th>
                             <th scope="col">Pre Sub Num</th>
                             <th scope="col">Name</th>

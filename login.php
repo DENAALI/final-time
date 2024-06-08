@@ -33,7 +33,7 @@
                 <span>Use your email and password</span>
                 <input type="email" placeholder="Email" name="email" id="email" required>
                 <input type="password" placeholder="Password" name="password" id="password" required>
-                <a href="#">Forget Your Password?</a>
+                <a href="recov_pass.php">Forget Your Password?</a>
                 <button type="submit" name="login">Sign In</button>
                 <p id="loginMessage"></p>
             </form>
