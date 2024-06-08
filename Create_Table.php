@@ -113,7 +113,7 @@ while ($row = $result->fetch_assoc()) {
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#hallModal" id="genrate">Genrate</button>
+                <button class="btn btn-primary " data-toggle="modal" data-target="#hallModal" id="genrate">Genrate</button>
                     
                 </li>
                 
