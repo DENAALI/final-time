@@ -18,7 +18,7 @@ section{
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #512da8;
+  background: #6f42c1;
   overflow: hidden;
 }
 section .air{
