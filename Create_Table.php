@@ -12,6 +12,21 @@ include('includes/navbar.php');
 include('connect.php');
 ?>
 <?php
+$sql = "SELECT * FROM schedule";
+$result = $conn->query($sql);
+$sql123 = "SELECT * FROM statistics";
+$result123 = $conn->query($sql123);
+if(mysqli_num_rows($result123)!=0){
+if(mysqli_num_rows($result)==0)
+{
+?>
+<script>
+    window.location.href = "php/tttt.php";
+</script>
+<?php
+}}
+?>
+<?php
 // require "connect.php";
 
 $sql = "SELECT id, major_name FROM major";
@@ -23,7 +38,43 @@ while ($row = $result->fetch_assoc()) {
     $majorOptions .= "<option value='" . $row['id'] . "'>" . $row['major_name'] . "</option>";
 }
 ?>
-
+<div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCourseModalLabel">Add Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="courseForm" method="POST" class="tm-contact-form">
+                    <div class="modal-body">
+                        <input type="hidden" name="course_id" id="course_id">
+                       
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="type">Type</label>
+                                <select name="type" id="type" class="form-control" required>
+                                    <option value="theoretical">Theoretical</option>
+                                    <option value="laboratory">Laboratory</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="capacity">Student Number</label>
+                                <input type="text" name="capacity" id="capacity" class="form-control" placeholder="Capacity" required>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="modalBtn" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -39,6 +90,8 @@ while ($row = $result->fetch_assoc()) {
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="modalBtn-add">Add Course</button>
+
         <!-- <ul class="navbar-nav ml-auto">
                 <li class="nav-item"> -->
 
@@ -218,6 +271,34 @@ while ($row = $result->fetch_assoc()) {
                }
            });
   }
+  $('#courseForm').submit(function(event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: 'php/add_ekhtear.php',
+            data: formData,
+            success: function(response) {
+                var jsonResponse = response;
+                if (jsonResponse) {
+                    $('#addCourseModal').modal('hide');
+                    if(jsonResponse=='update')
+                    $('#successModalupdate').modal('show');
+                  if(jsonResponse=='add')
+                  $('#successModal').modal('show');
+                    // refreshTable();
+                    console.log(response);
+                } else {
+                    console.log("Error adding/updating course: " + jsonResponse.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
 
 </script>
 

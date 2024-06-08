@@ -104,11 +104,20 @@ if(strlen($time)>5)
     $sub_time=substr($time,0,2);
 }
 // echo substr($time,0,2);
-$sqlTeacherTimeConflict = "SELECT * FROM schedule WHERE techer='$teacher' AND day='$day' and time='$sub_time%' ";
-
+$parts =  explode('_', $_POST['time']);
+$part1= $parts[0];
+$start='';
+if(str_contains($part1,':')){
+    $temp= explode(':', $part1);
+    $start=$temp[0];
+    }else{
+        $start=$part1;
+        }
+        echo $start;
+        $sqlTeacherTimeConflict = "SELECT * FROM schedule WHERE techer='$teacher' AND day='$day' and time like '$start%' ";
 $result = $conn->query($sqlTeacherTimeConflict);
 if ($result->num_rows > 0) {
-    print_r($result->fetch_array());
+    // print_r($result->fetch_array());
     echo "هذا الأستاذ لديه محاضرة أخرى في نفس الوقت.";
     exit;
 }

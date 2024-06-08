@@ -221,15 +221,15 @@ if(mysqli_num_rows($result)==0)
     echo "</pre>";
 ?>
 <script>
-    window.location.href = "../../";
+    window.location.href = "../Create_Table.php";
 </script>
 <?php
     echo "<button class='btn'>next</button>";
-    header('location:../../index.php');
+    header('location:../Create_Table.php');
 }else{
     ?>
     <script>
-    window.location.href = "../../";
+    window.location.href = "../Create_Table.php";
     </script>
     <?php
     }

@@ -1,6 +1,33 @@
 <?php
 // require "../../connect.php";
 
+$time_1=[
+
+'8_9',
+'9_10',
+'10_11',
+'11_12',
+'12_13',
+'13_14',
+'14_15',
+'15_16',
+];
+$time_2=[
+    '8_10',
+'10_12',
+'12_14',
+'14_16',
+
+];
+$time_3=[
+  '8-9:30',
+   '9:30_11',
+    '11_12:30',
+    '12:30_14',
+    '14_15:30',
+    
+
+];
 
 $major_id = 0;
 $schedual = [];
@@ -9,9 +36,10 @@ if (isset($_POST['major5'])) {
     $major_id = $_POST['major5'];
     // $level = $_POST['level1'];
     $semester = $_POST['semester5'];
-
-
+    
 ?>
+
+
 <td style="display: none;" >
     <input type="hidden" id="major2" value="<?php echo $major_id ?>" name="major2">
 </td>
@@ -26,18 +54,15 @@ if (isset($_POST['major5'])) {
     } elseif ($_POST['major5'] == 3) {
         $major = '222';
     }
-
     // جلب بيانات القاعات
     $sqlHalls = "SELECT * FROM hall";
     $resultHalls = $conn->query($sqlHalls);
-
     $halls = [];
     if ($resultHalls->num_rows > 0) {
         while ($row = $resultHalls->fetch_assoc()) {
             $halls[$row['type_name']][] = $row;
         }
     }
-
     // جلب بيانات الدورات
     $sql12 = "SELECT `course id`, `course name` FROM tims GROUP BY `course name`";
     $sql = "SELECT * FROM statistics";
@@ -46,19 +71,30 @@ if (isset($_POST['major5'])) {
     $conflect = "";
     $scedual_select = "SELECT * FROM `schedule` where subject_id like '$major%'";
     $scedual_res = $conn->query($scedual_select);
-    
     // جلب بيانات المدرسين
     $teachers = [];
     $teacher_schedule = [];
-    $sqlTeachers = "SELECT id, name FROM teacher WHERE type != 'admin' AND (depar_num=$major_id)";
-    $teacher_result = $conn->query($sqlTeachers);
-   
-    while ($teacher_row = $teacher_result->fetch_assoc()) {
-        $teachers[$teacher_row['id']] = [
-            'name' => $teacher_row['name'],
-            'subjects' => 0,
-            'classes' => []
-        ];
+    $selectteces="select * from tetches";
+    $resultteces=$conn->query($selectteces);
+    while($row=$resultteces->fetch_assoc()){
+        
+        $id=$row['techer_id'];
+        $sqlTeachers = "SELECT * FROM teacher WHERE type != 'admin'  and id='$id' ";
+        $teacher_result = $conn->query($sqlTeachers);
+        // while ($teacher_row = $teacher_result->fetch_assoc()) {
+        if($teacher_result->num_rows!=0){
+            $teacher_row = $teacher_result->fetch_assoc();
+            if($row['techer_id']==$teacher_row['id']&&$teacher_row['active']=='yes'){
+           
+                $teachers[$teacher_row['id']] = [
+                    'name' => $teacher_row['name'],
+                    'sub_id' => $row['subject_id'],
+                    'subjects' => 0,
+                    'classes' => []
+                ];
+            }
+        }
+        // }
     }
 
     // تخصيص عدد المواد بناءً على نوع المدرس
@@ -72,7 +108,6 @@ if (isset($_POST['major5'])) {
         }
         return 0;
     }
-
     // تحويل الأوقات النصية إلى أرقام
     function timeToNumber($time) {
         $parts = explode('_', $time);
@@ -127,7 +162,7 @@ if (isset($_POST['major5'])) {
                         continue; // المواد العملية يمكن أن تُدرس فقط من قبل Mr أو Mrs
                     }
                     $can_assign = canAssignTeacher($teacher, $row['day'], $row['time'], $isLab);
-                    if ($can_assign&&$row['techer']==''&&subcount($conn,$teacher['name'])) {
+                    if ($can_assign&&$row['techer']==''&&subcount($conn,$teacher['name']) && $row['subject_id']==$teachers[$teacher_id]['sub_id']) {
                         $teachers[$teacher_id]['subjects'] += 1;
                         $teachers[$teacher_id]['classes'][] = ['day' => $row['day'], 'time' => $row['time']];
                         $assigned_teacher = $teacher['name'];
@@ -135,7 +170,6 @@ if (isset($_POST['major5'])) {
                     }
                 }
             }
-            
             echo "<tr>";    
             // echo "<td>" . $i. "</td>";
             echo "<td>" . $row['subject_id'] . "</td>";
@@ -143,13 +177,64 @@ if (isset($_POST['major5'])) {
             echo "<td>" . $row['section'] . "</td>";
             echo "<td>" . $row['student_num'] . "</td>";
             echo "<td>" . $row['day'] . "</td>";
-            echo "<td>" . $row['time'] . "</td>";
-            echo "<td>" . $row['hall'] . "</td>";
-            echo "<td><select class='form-control bg-light border-0 small' name='teachers[" . $row['subject_id'] . "][" . $row['section'] . "]'>";
+            echo "<td>" ; 
+            echo "<select style='    width: 118px;' class='form-control bg-light border-0 small' name='hours[" . $row['subject_id'] . "][" . $row['section'] . "]' id='hours".$row['subject_id'].$row['section']."'>";
+                echo"<option selected value='".$row['time']."'>".$row['time']."</option>";
+                if((substr($row['subject_id'],4,1)==2||substr($row['subject_id'],4,1)==1) ){
+                    if(!str_contains($row['subject_name'],'Lab')&&!str_contains($row['subject_name'],'lab')&&!str_contains($row['subject_name'],'LAB'))
+                    foreach($time_1 as $key=> $time){
+                        if($row['time']!=$time_1[$key])
+                        echo"<option  value='".$time_1[$key]."'>".$time_1[$key]."</option>";
+                    }else{
+                        foreach($time_2 as $key=> $time){
+                            if($row['time']!=$time_2[$key])
+                            echo"<option  value='".$time_2[$key]."'>".$time_2[$key]."</option>";
+                        }
+                    }
+
+                }elseif((substr($row['subject_id'],4,1)==4||substr($row['subject_id'],4,1)==3)){
+
+                    if(!str_contains($row['subject_name'],'Lab')&&!str_contains($row['subject_name'],'lab')&&!str_contains($row['subject_name'],'LAB'))
+                    foreach($time_3 as $key=> $time){
+                        if($row['time']!=$time_3[$key])
+                        echo"<option  value='".$time_3[$key]."'>".$time_3[$key]."</option>";
+                    
+                    }else{
+                        foreach($time_2 as $key=> $time){
+                            if($row['time']!=$time_2[$key])
+                            echo"<option  value='".$time_2[$key]."'>".$time_2[$key]."</option>";
+                        }
+                    }
+                    
+                }
+            echo"</select>";
+            echo "</td>";
+            echo "<td style='    width: 118px;' >";
+            echo   "<select class='form-control bg-light border-0 small' name='halls[" . $row['subject_id'] . "][" . $row['section'] . "]' id='halls".$row['subject_id'].$row['section']."'>" ;
+            echo"<option selected value='".$row['hall']."'>".$row['hall']."</option>";
+            if(!str_contains($row['subject_name'],'Lab')&&!str_contains($row['subject_name'],'lab')&&!str_contains($row['subject_name'],'LAB'))
+            {
+                foreach($halls["theoretical"] as $hall){
+                    if($row['hall']!=$hall['hall_name'])
+                    echo"<option  value='".$hall['hall_name']."'>".$hall['hall_name']."</option>";
+
+                }
+            }
+            else
+            {
+                foreach($halls["laboratory"] as $hall){
+                    if($row['hall']!=$hall['hall_name'])
+                    echo"<option  value='".$hall['hall_name']."'>".$hall['hall_name']."</option>";
+
+                }
+            }
+            echo"</select>";
+            echo "</td>";
+            echo "<td><select class='form-control bg-light border-0 small' name='teachers[" . $row['subject_id'] . "][" . $row['section'] . "]' id='teachers".$row['subject_id'].$row['section']."' >";
             echo "<option selected value='non'>non</option>";
             $selectAlltecher="SELECT id, name FROM teacher WHERE type != 'admin' ";
             if($row['techer']==""){
-                
+
                 foreach ($teachers as $teacher_id => $teacher) {
                 // while ($teacher=$techers_result->fetch_assoc()) {
                     if ($teacher['name']== $assigned_teacher) {
@@ -160,6 +245,15 @@ if (isset($_POST['major5'])) {
 
                 }
                 
+                foreach ($teachers as $teacher_id => $teacher) {
+                    // while ($teacher=$techers_result->fetch_assoc()) {
+                    if ($teacher['name']!= $assigned_teacher&&$teacher['sub_id']==$row['subject_id']) {
+                        echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
+                    } else {
+                        // echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
+                    }
+                }
+                echo "<option value=''></option>";
                 $techers_result = mysqli_query($conn,$selectAlltecher);
                 $Altechers= $techers_result->fetch_array();
                 while ($teacher=$techers_result->fetch_assoc()) {
@@ -169,7 +263,6 @@ if (isset($_POST['major5'])) {
                 }
             }else{
                 // echo "<option selected value='".$row['techer']."'>".$row['techer']."</option>";
-
                 foreach ($teachers as $teacher_id => $teacher) {
                     if ($teacher['name'] == $row['techer']) {
                         echo "<option selected value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
@@ -177,6 +270,15 @@ if (isset($_POST['major5'])) {
                         // echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
                     }
                 }
+                foreach ($teachers as $teacher_id => $teacher) {
+                    // while ($teacher=$techers_result->fetch_assoc()) {
+                    if ($teacher['name']!= $assigned_teacher&&$teacher['sub_id']==$row['subject_id']) {
+                        echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
+                    } else {
+                        // echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
+                    }
+                }
+                echo "<option value=''></option>";
                 
                 $techers_result = mysqli_query($conn,$selectAlltecher);
                 $Altechers= $techers_result->fetch_array();
@@ -245,7 +347,7 @@ $(document).ready(function() {
         var subject_id = $(this).closest('tr').find('td:first').text();
         var section = day = $(this).closest('tr').find('td').eq(2).text();
         var day = $(this).closest('tr').find('td').eq(4).text();
-        var time = $(this).closest('tr').find('td').eq(5).text();
+        var time = $('#hours'+subject_id+section).val();
         var major_id = $('#major2').val();
         var semester = $('#semester2').val();
         
@@ -270,5 +372,78 @@ $(document).ready(function() {
             }.bind(this)
         });
     });
+    $('select[name^="halls"]').focus(function() {
+        // تخزين القيمة الحالية عند التركيز على القائمة المنسدلة
+        previousValue = $(this).val();
+    }).change(function() {
+        var subject_id = $(this).closest('tr').find('td:first').text();
+        var section = day = $(this).closest('tr').find('td').eq(2).text();
+        var day = $(this).closest('tr').find('td').eq(4).text();
+        var time = $('#hours'+subject_id+section).val();
+        var teacher = $('#teachers'+subject_id+section).val();
+        var major_id = $('#major2').val();
+        var semester = $('#semester2').val();
+        var hall = $(this).val();
+
+        
+        $.ajax({
+            url: 'php/check_halls.php',
+            type: 'POST',
+            data: {
+                teacher: teacher,
+                subject_id: subject_id,
+                section: section,
+                day: day,
+                time: time,
+                major_id: major_id,
+                semester: semester,
+                hall:hall
+            },
+            success: function(response) {
+                if (response != 'ok') {
+                    alert(response);
+                    $(this).val(previousValue);  // إعادة تعيين القيمة إلى القيمة السابقة في حالة وجود تضارب
+                }
+                console.log(response);
+            }.bind(this)
+        });
+    });
+    $('select[name^="hours"]').focus(function() {
+        // تخزين القيمة الحالية عند التركيز على القائمة المنسدلة
+        previousValue = $(this).val();
+    }).change(function() {
+        var time = $(this).val();
+        var subject_id = $(this).closest('tr').find('td:first').text();
+        var section = day = $(this).closest('tr').find('td').eq(2).text();
+        var day = $(this).closest('tr').find('td').eq(4).text();
+        // var teacher = $(this).closest('tr').find('td').eq(7).text()[0];
+        var teacher = $('#teachers'+subject_id+section).val();
+        var hall = $('#halls'+subject_id+section).val();
+        var major_id = $('#major2').val();
+        var semester = $('#semester2').val();
+        
+        $.ajax({
+            url: 'php/check_time.php',
+            type: 'POST',
+            data: {
+                teacher: teacher,
+                subject_id: subject_id,
+                section: section,
+                day: day,
+                time: time,
+                major_id: major_id,
+                semester: semester,
+                hall:hall
+            },
+            success: function(response) {
+                if (response != 'ok') {
+                    alert(response);
+                    $(this).val(previousValue);  // إعادة تعيين القيمة إلى القيمة السابقة في حالة وجود تضارب
+                }
+                console.log(response);
+            }.bind(this)
+        });
+    });
 });
 </script>
+

@@ -94,8 +94,7 @@
 
 <?php
 
-// include '../connect.php';
-// require_once '../../connect.php';
+
 $dbServername = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
@@ -125,8 +124,8 @@ if (isset($_POST['major1'])) {
             $halls[$row['type_name']][] = $row;
         }
     }
-
     // جلب بيانات الدورات
+
     $sql12 = "SELECT * FROM tims where `course name`= GROUP BY `course name`";
     // $result1 = $conn->query($sql12);
     $sql = "SELECT * FROM statistics";
@@ -134,7 +133,7 @@ if (isset($_POST['major1'])) {
     $courses = [];
     $conflect = "";
 
-    $scedual_select = "SELECT *, COUNT(subject_name) as 'count' FROM `schedule` where subject_id like '$major%'  GROUP BY subject_name";
+    $scedual_select = "SELECT *, COUNT(subject_name) as 'count',SUM(student_num) as 'sum' FROM `schedule` where subject_id like '$major%'  GROUP BY subject_name";
     $scedual_res = $conn->query($scedual_select);
 
     $schedule_courses = [];
@@ -144,14 +143,16 @@ if (isset($_POST['major1'])) {
 
     $selectsub = "SELECT * FROM `subjects` WHERE semester=$semester AND subject_id like '$major%' and major_id= $major_id";
     $sub_result = $conn->query($selectsub);
-
+    $student_count = 0;
     while ($row2 = $sub_result->fetch_assoc()) {
         $subject_id = $row2['subject_id'];
         $subject_name = $row2['name'];
         if (isset($schedule_courses[$subject_id])) {
             $schedule_course = $schedule_courses[$subject_id];
             $count = $schedule_course['count'];
+            $student_count = $schedule_course['sum'];
         } else {
+            $student_count = 0;
             $count = 0;
             // $sql12 = "SELECT * FROM tims where `course name`=$subject_id and section=1 ";
             // $result1 = $conn->query($sql12);
@@ -161,15 +162,15 @@ if (isset($_POST['major1'])) {
             //         (".$time_row['course id'].",'".$time_row['course name']."','".$time_row['section']."','".$time_row['hour']."','".$time_row['day']."','$Hall',$stu_count) ";
             //         if($conn->query($insert_scedual)){}
         }
-        $student_count = 0;
-        $result = $conn->query($sql);
-        while ($stat_res = $result->fetch_assoc()) {
-            if ($stat_res['subject_num'] == $subject_id) {
+        
+        // $result = $conn->query($sql);
+        // while ($stat_res = $result->fetch_assoc()) {
+        //     if ($stat_res['subject_num'] == $subject_id) {
 
-                $student_count = $stat_res['num_of_study'];
+        //         $student_count = $stat_res['num_of_study'];
 
-            }
-        }
+        //     }
+        // }
         echo "<tr id='row" . $subject_id . "' >";
         echo "<td>" . $subject_id . "</td>";
         echo "<td>" . $subject_name . "</td>";

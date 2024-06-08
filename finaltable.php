@@ -49,8 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (isset($_POST['teachers'][$row['subject_id']][$row['section']])) {
             $teacher = $_POST['teachers'][$row['subject_id']][$row['section']];
+            $hall = $_POST['halls'][$row['subject_id']][$row['section']];
+            $hour = $_POST['hours'][$row['subject_id']][$row['section']];
             // if ($teacher != '') {
-                $update = "UPDATE `schedule` SET `techer`='$teacher' WHERE subject_id=" . $row['subject_id'] . " AND section=" . $row['section'];
+                // if (isset($_POST['hours'][$row['subject_id']][$row['section']])) {}
+                // if (isset($_POST['halls'][$row['subject_id']][$row['section']])) {
+
+                // }
+
+                $update = "UPDATE `schedule` SET `techer`='$teacher', time='$hour', hall='$hall'  WHERE subject_id=" . $row['subject_id'] . " AND section=" . $row['section'];
                 $result = $conn->query($update);
                 if ($result === false) {
                     die("فشل في تنفيذ الاستعلام: " . $conn->error);
