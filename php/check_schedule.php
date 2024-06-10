@@ -73,14 +73,14 @@ if ($subject_count >= $max_subjects) {
 $current_time = timeToNumber($time);
 $sub_time=substr($time,0,2);
 foreach ($class_times as $class_time) {
-    if ($class_time['day'] == $day) {
-        if ($class_time['time']==$sub_time) {
-            // print_r($class_times);
-            // print_r($sub_time);
-            echo "يجب أن يأخذ الأستاذ فترة راحة بين المحاضرات.";
-            exit;
-        }
-    }
+    // if ($class_time['day'] == $day) {
+    //     if ($class_time['time']==$sub_time) {
+    //         // print_r($class_times);
+    //         // print_r($sub_time);
+    //         echo "يجب أن يأخذ الأستاذ فترة راحة بين المحاضرات.";
+    //         exit;
+    //     }
+    // }
 }
 
 // تحقق من شرط عدم التضارب في الوقت
