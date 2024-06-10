@@ -26,16 +26,7 @@ $type = $_POST['type-user'] ?? null;
 //     // استخدام الهاش السابق لكلمة المرور
 //     $hashedPassword = $password;
 // }
-$newdegree='';
-if($degree=='Bachelors'){
-    $newdegree='prof. ';
-    }
-    elseif($degree=='Postgraduate'){
-        $newdegree='Dr. ';
-    }
-    elseif($degree=='Master'){
-    $newdegree='Mr. ';
-    }
+
 $otp = rand(100000,999999);
 $action = isset($teacherId) && !empty($teacherId) ? 'update' : 'add';
 
@@ -65,7 +56,7 @@ if ($teacherName && $major && $active &&  $email && $degree && $type) {
 
     } elseif ($action == 'add') {
         $stmt = $conn->prepare("INSERT INTO teacher (name, email, password, depar_num, active, date_from, date_to, degree, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssisssss", $newdegree.$teacherName, $email, $otp, $major, $active, $dateFrom, $dateTo, $degree, $type);
+        $stmt->bind_param("sssisssss",$teacherName, $email, $otp, $major, $active, $dateFrom, $dateTo, $degree, $type);
 
         if ($stmt->execute()) {
             echo json_encode(array('success' => true,'action' => 'add','value' => $otp,'email' => $email,'name' => $teacherName));
