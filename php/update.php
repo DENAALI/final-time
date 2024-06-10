@@ -59,63 +59,81 @@ if (isset($_POST['id1'])) {
             }
         }else{
             $id = $_POST['id1'];
-    
+
             // Select the schedule record
-            $scedual_select = "SELECT count(section) as 'count' FROM `schedule` WHERE subject_id = ?";
+            $scedual_select = "SELECT count(section) as 'count', SUM(student_num) as 'total_students' FROM `schedule` WHERE subject_id = ?";
             $stmt = $conn->prepare($scedual_select);
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $scedual_res = $stmt->get_result();
             $scedual_row = $scedual_res->fetch_assoc();
-            if($scedual_row['count']>0){
-                // echo $scedual_row['count'];
-                $scedual_select = "SELECT * FROM `schedule` WHERE subject_id = ? order by section";
+            
+            if ($scedual_row['count'] > 0) {
+                $total_students = $scedual_row['total_students'];
+            
+                // Get all sections
+                $scedual_select = "SELECT * FROM `schedule` WHERE subject_id = ? ORDER BY section";
                 $stmt = $conn->prepare($scedual_select);
                 $stmt->bind_param("i", $id);
                 $stmt->execute();
                 $scedual_res = $stmt->get_result();
-                // $scedual_row = $scedual_res->fetch_assoc();
                 $sections = [];
-                if($scedual_res->num_rows>0){
-        
-                    while($row = $scedual_res->fetch_assoc()) {
+                if ($scedual_res->num_rows > 0) {
+                    while ($row = $scedual_res->fetch_assoc()) {
                         $sections[] = $row;
                     }
                 }
-                
-                // Determine the number of students to transfer to the new section
-                $total_students = 0;
-                foreach ($sections as $section) {
-                    $total_students += $section['student_num'];
-                }
-        
-                $students_to_transfer = intval($total_students * 0.1); // Transfer 10% of the total students to the new section
-        
+            
                 // Create the new section
                 $new_section_number = count($sections) + 1;
-                $new_section_students = $students_to_transfer;
-                $insert_new_section = "INSERT INTO `schedule` (subject_id, section, student_num,subject_name,day) VALUES (?, ?, ?,?,?)";
+                $new_section_students = 0; // Initialize the count of students for the new section
+                $insert_new_section = "INSERT INTO `schedule` (subject_id, section, student_num, subject_name, day) VALUES (?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($insert_new_section);
-                $stmt->bind_param("siiss", $id, $new_section_number, $new_section_students,$sections[0]['subject_name'],$sections[0]['day']);
+                $stmt->bind_param("siiss", $id, $new_section_number, $new_section_students, $sections[0]['subject_name'], $sections[0]['day']);
                 $stmt->execute();
-        
-                // Distribute the students among the existing sections
-                $remaining_students_to_transfer = $students_to_transfer;
+                $new_section_id = $conn->insert_id; // Get the ID of the new section
+            
+                // Recalculate total sections including the new one
+                $total_sections = count($sections) + 1;
+                $students_per_section = floor($total_students / $total_sections);
+                $remaining_students = $total_students % $total_sections;
+            
+                // Update each section including the new one
                 foreach ($sections as $key => $section) {
-                    if ($remaining_students_to_transfer <= 0) break;
-        
-                    $students_from_section = min($section['student_num'], $remaining_students_to_transfer);
-                    $sections[$key]['student_num'] -= $students_from_section;
-                    $remaining_students_to_transfer -= $students_from_section;
-                }
-        
-                // Update the existing sections with the new student numbers
-                foreach ($sections as $section) {
+                    $sections[$key]['student_num'] = $students_per_section;
                     $update = "UPDATE `schedule` SET student_num = ? WHERE id = ?";
                     $stmt = $conn->prepare($update);
-                    $stmt->bind_param("ii", $section['student_num'], $section['id']);
+                    $stmt->bind_param("ii", $sections[$key]['student_num'], $sections[$key]['id']);
                     $stmt->execute();
                 }
+            
+                // Update the new section
+                $new_section_students = $students_per_section + $remaining_students; // Assign remaining students to the new section
+                $update_new_section = "UPDATE `schedule` SET student_num = ? WHERE id = ?";
+                $stmt = $conn->prepare($update_new_section);
+                $stmt->bind_param("ii", $new_section_students, $new_section_id);
+                $stmt->execute();
+            
+
+
+        
+                // Distribute the students among the existing sections
+                // $remaining_students_to_transfer = $students_to_transfer;
+                // foreach ($sections as $key => $section) {
+                //     if ($remaining_students_to_transfer <= 0) break;
+        
+                //     $students_from_section = min($section['student_num'], $remaining_students_to_transfer);
+                //     $sections[$key]['student_num'] -= $students_from_section;
+                //     $remaining_students_to_transfer -= $students_from_section;
+                // }
+        
+                // // Update the existing sections with the new student numbers
+                // foreach ($sections as $section) {
+                //     $update = "UPDATE `schedule` SET student_num = ? WHERE id = ?";
+                //     $stmt = $conn->prepare($update);
+                //     $stmt->bind_param("ii", $section['student_num'], $section['id']);
+                //     $stmt->execute();
+                // }
                 $time_1 = [
 
                     '10_11',
@@ -199,7 +217,7 @@ if (isset($_POST['id1'])) {
                             }else{
                                 $update = "UPDATE `schedule` SET time = ?,hall=? WHERE id = ?";
                         $stmt = $conn->prepare($update);
-                        $stmt->bind_param("ssi", $time,$hall['hall_name'], $row['id']);
+                        $stmt->bind_param("ssi", $time," ", $row['id']);
                         $stmt->execute();
                             }
                         }
