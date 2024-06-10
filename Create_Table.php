@@ -106,7 +106,7 @@ while ($row = $result->fetch_assoc()) {
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-        <button class="btn btn-primary" style="    width: -webkit-fill-available;" data-toggle="modal" data-target="#addCourseModal" id="modalBtn-add">Chose Elective Specialization </button>
+        <!-- <button class="btn btn-primary" style="    width: -webkit-fill-available;" data-toggle="modal" data-target="#addCourseModal" id="modalBtn-add">Chose Elective Specialization </button> -->
 
         <!-- <ul class="navbar-nav ml-auto">
                 <li class="nav-item"> -->
