@@ -78,7 +78,7 @@ if (isset($_POST['major5'])) {
     while($row=$resultteces->fetch_assoc()){
         
         $id=$row['techer_id'];
-        $sqlTeachers = "SELECT * FROM teacher WHERE type != 'admin'  and id='$id' ";
+        $sqlTeachers = "SELECT * FROM teacher WHERE type != 'admin'  and id='$id'  ";
         $teacher_result = $conn->query($sqlTeachers);
         // while ($teacher_row = $teacher_result->fetch_assoc()) {
         if($teacher_result->num_rows!=0){
@@ -231,7 +231,7 @@ if (isset($_POST['major5'])) {
             echo "</td>";
             echo "<td><select class='form-control bg-light border-0 small' name='teachers[" . $row['subject_id'] . "][" . $row['section'] . "]' id='teachers".$row['subject_id'].$row['section']."' >";
             echo "<option selected value='non'>non</option>";
-            $selectAlltecher="SELECT id, name FROM teacher WHERE type != 'admin' ";
+            $selectAlltecher="SELECT id, name FROM teacher WHERE type != 'admin' and active ='yes'";
             if($row['techer']==""){
 
                 foreach ($teachers as $teacher_id => $teacher) {
