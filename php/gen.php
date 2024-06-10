@@ -9,7 +9,6 @@
 // $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
 // $major_id = 0;
 // $schedual = [];
-
 // if (isset($_POST['major1'])) {
 //     $major_id = $_POST['major1'];
 //     // $level = $_POST['level1'];
@@ -170,7 +169,7 @@ if (isset($_POST['major1'])) {
         //         $student_count = $stat_res['num_of_study'];
 
         //     }
-        // }
+        // } 
         echo "<tr id='row" . $subject_id . "' >";
         echo "<td>" . $subject_id . "</td>";
         echo "<td>" . $subject_name . "</td>";

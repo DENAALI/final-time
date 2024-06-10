@@ -2,7 +2,6 @@
 // require "../../connect.php";
 
 $time_1=[
-
 '8_9',
 '9_10',
 '10_11',
@@ -170,7 +169,7 @@ if (isset($_POST['major5'])) {
                     }
                 }
             }
-            echo "<tr>";    
+            echo "<tr id='row" . $row['subject_id'] . $row['section'] . "'>";    
             // echo "<td>" . $i. "</td>";
             echo "<td>" . $row['subject_id'] . "</td>";
             echo "<td>" . $row['subject_name'] . "</td>";
@@ -343,6 +342,29 @@ $(document).ready(function() {
         // تخزين القيمة الحالية عند التركيز على القائمة المنسدلة
         previousValue = $(this).val();
     }).change(function() {
+        var subject_id = $(this).closest('tr').find('td:first').text();
+        var section = day = $(this).closest('tr').find('td').eq(2).text();
+        var teacher = $(this).val();
+        var time = $('#hours'+subject_id+section).val();
+        var day = $(this).closest('tr').find('td').eq(4).text();
+        var isBusy = false;
+        // alert(teacher);
+        if(teacher!=='non'){        
+        $('table tr').each(function() {
+            var currentTeacher = $(this).find('td select[id^="teachers"]').val();
+            var currentTime = $(this).find('td select[id^="hours"]').val();
+            var currentDay = $(this).find('td:nth-child(5)').text();
+            
+            if (currentTeacher === teacher && currentTime === time && currentDay === day && $(this).attr('id') !== 'row' + subject_id + section) {
+                isBusy = true;
+                return false; // Exit the loop
+            }
+        });
+    }
+        if (isBusy) {
+            alert('The selected teacher is busy at this time.'+teacher);
+            $('#teachers' + subject_id + section).val(previousValue); // Reset to default or handle accordingly
+        }
         var teacher = $(this).val();
         var subject_id = $(this).closest('tr').find('td:first').text();
         var section = day = $(this).closest('tr').find('td').eq(2).text();
@@ -447,3 +469,27 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+function checkTeacherAvailability(subjectId, section) {
+    var teacher = $('#teachers' + subjectId + section).val();
+    var time = $('#hours' + subjectId + section).val();
+    var day = $('#row' + subjectId + section + ' td:nth-child(5)').text();
+    var isBusy = false;
+
+    $('table tr').each(function() {
+        var currentTeacher = $(this).find('td select[id^="teachers"]').val();
+        var currentTime = $(this).find('td select[id^="hours"]').val();
+        var currentDay = $(this).find('td:nth-child(5)').text();
+
+        if (currentTeacher === teacher && currentTime === time && currentDay === day && $(this).attr('id') !== 'row' + subjectId + section) {
+            isBusy = true;
+            return false; // Exit the loop
+        }
+    });
+
+    if (isBusy) {
+        alert('The selected teacher is busy at this time.');
+        $('#teachers' + subjectId + section).val('non'); // Reset to default or handle accordingly
+    }
+}
+</script>

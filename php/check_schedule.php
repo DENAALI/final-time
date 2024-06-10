@@ -113,7 +113,7 @@ if(str_contains($part1,':')){
     }else{
         $start=$part1;
         }
-        echo $start;
+        // echo $start;
         $sqlTeacherTimeConflict = "SELECT * FROM schedule WHERE techer='$teacher' AND day='$day' and time like '$start%' ";
 $result = $conn->query($sqlTeacherTimeConflict);
 if ($result->num_rows > 0) {

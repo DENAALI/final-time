@@ -21,7 +21,7 @@ if(mysqli_num_rows($result)==0)
 {
 ?>
 <script>
-    window.location.href = "php/tttt.php";
+    // window.location.href = "php/tttt.php";
 </script>
 <?php
 }}
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addCourseModalLabel">Add Course</h5>
+                    <h5 class="modal-title" id="addCourseModalLabel">Chose Elective Specialization </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,14 +50,30 @@ while ($row = $result->fetch_assoc()) {
                 <form id="courseForm" method="POST" class="tm-contact-form">
                     <div class="modal-body">
                         <input type="hidden" name="course_id" id="course_id">
-                       
+                       <?php
+                       $techer_id=$_SESSION['teacher_id'];
+                        $select_="select * from teacher where id = $techer_id";
+                        $result=$conn->query($select_);
+                        $row=$result->fetch_assoc();
+                         $majorid= $row['depar_num'];
+                        $major=['CS','SE','DS'];
+                        $select_optional="SELECT * FROM `optnal` WHERE ".$major[$majorid-1]."=1  ";
+                        $result_optional=$conn->query($select_optional);
+                        
+
+                       ?>
                         
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="type">Type</label>
                                 <select name="type" id="type" class="form-control" required>
-                                    <option value="theoretical">Theoretical</option>
-                                    <option value="laboratory">Laboratory</option>
+                                    <?php
+                                    while($row_optional=$result_optional->fetch_assoc()){
+                                        echo "<option value='".$row_optional['subject_id']."'>".$row_optional['name']."</option>";
+                                    }
+                                    ?>
+                                    
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -90,11 +106,16 @@ while ($row = $result->fetch_assoc()) {
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="modalBtn-add">Add Course</button>
+        <button class="btn btn-primary" style="    width: -webkit-fill-available;" data-toggle="modal" data-target="#addCourseModal" id="modalBtn-add">Chose Elective Specialization </button>
 
         <!-- <ul class="navbar-nav ml-auto">
                 <li class="nav-item"> -->
+                    <?php
+                    if(true){
 
+                    
+                    ?>
+    
                     <label for="major"> major:</label>
                 <select id="major1" name="major1" class="form-control bg-light border-0 small" style="font-size: large; width: 200px;">
                 <?php echo $majorOptions; ?>
@@ -131,7 +152,10 @@ while ($row = $result->fetch_assoc()) {
 <input type="hidden" id="semester3"  name="semester2">
 </form>                </li>
             </ul>
-
+            
+            <?php
+            }
+            ?>
         </nav>
         <!-- End of Topbar -->
 
@@ -165,6 +189,7 @@ while ($row = $result->fetch_assoc()) {
                 <th> Number of Student</th>
                 
                 <th>edite</th>
+                <th>ِAdd</th>
                 <!-- <th>edite</th>
                 <th>Hall</th> -->
                 
@@ -201,7 +226,7 @@ while ($row = $result->fetch_assoc()) {
                
                $.ajax({
                    type: 'POST',
-                   url: 'php/gen.php',
+                   url: 'testtaple.php',
                    data: {major1: major1,  semester1: semester1},
                    success: function(response) {
                        // console.log(major1); // تحقق من الاستجابة بعد النجاح
@@ -210,7 +235,7 @@ while ($row = $result->fetch_assoc()) {
                        document.getElementById('btnnext1').style.display = 'none';
                        document.getElementById('major2').value = major1;
                        document.getElementById('semester2').value = semester1;
-                       
+                    //    console.log(response);
                        
                    }
                });
@@ -250,7 +275,8 @@ while ($row = $result->fetch_assoc()) {
 
    function update(event,id){
        event.preventDefault();
-   $.ajax({
+     
+        $.ajax({
                type: 'POST',
                url: 'php/update.php',
                data: {id1:id},
@@ -270,6 +296,38 @@ while ($row = $result->fetch_assoc()) {
 
                }
            });
+     
+           
+        
+  
+ 
+  }
+   function update1(event,id){
+       event.preventDefault();
+            var add=12;
+            $.ajax({
+               type: 'POST',
+               url: 'php/update.php',
+               data: {id1:id,add:add},
+               success: function(response) {
+                   // console.log(document.getElementById('count'+id).innerHTML.replace(""));
+                   document.getElementById('count'+id).innerHTML=parseInt(document.getElementById('count'+id).innerHTML)+1;
+                   
+                   console.log(response);
+                //    if(response=='done1'){
+                //        document.getElementById('row'+id).remove();
+                //    }
+                   // console.log(major1); // تحقق من الاستجابة بعد النجاح
+                   // $('#count'+id).html(parseInt($('#count'+id).html)+1); 
+                   // document.getElementById('nextnext').style.display = 'block';
+
+                  
+
+               }
+           });
+        
+  
+ 
   }
   $('#courseForm').submit(function(event) {
         event.preventDefault();
