@@ -217,7 +217,7 @@ if (isset($_POST['id1'])) {
                             }else{
                                 $update = "UPDATE `schedule` SET time = ?,hall=? WHERE id = ?";
                         $stmt = $conn->prepare($update);
-                        $stmt->bind_param("ssi", $time," ", $row['id']);
+                        $stmt->bind_param("ssi", $time,$hall['hall_name'], $row['id']);
                         $stmt->execute();
                             }
                         }
