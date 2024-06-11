@@ -203,7 +203,7 @@ $type = $_SESSION['type'];
                ?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
+            <i class="fas fa-user-tie fa-2x"></i>
             </div>
           </div>
         </div>
@@ -226,7 +226,30 @@ $type = $_SESSION['type'];
                ?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
+            <i class="fas fa-chalkboard-teacher fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">subjects </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"> <?php
+               
+               $sql="SELECT COUNT(*) FROM subjects ";
+               $result=mysqli_query($conn,$sql);
+               $row=mysqli_fetch_array($result);
+               echo ' <h5 class="text-gradient text-info" id="state5" countTo='.$row[0].'>0</h5>'; 
+               
+               
+               ?></div>
+            </div>
+            <div class="col-auto">
+            <i class="fas fa-book-reader fa-2x"></i>
             </div>
           </div>
         </div>
@@ -248,13 +271,14 @@ $type = $_SESSION['type'];
                ?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
+            <i class="fas fa-user-friends fa-2x"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
     <?php } ?>
+    
     <!-- Earnings (Monthly) Card Example -->
     <!-- <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-info shadow h-100 py-2">
@@ -288,29 +312,37 @@ $type = $_SESSION['type'];
   <section>
     
   <div class="patterns">
+
   <svg width="100%" height="100%">
+    
     <defs>
       <pattern id="polka-dots" x="0" y="0"                    width="100" height="100"
                patternUnits="userSpaceOnUse">
         <!-- <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle> -->
+         
       </pattern>  
+      
         <style>
      @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+  
    </style>
       
     </defs>
               
     <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
      
-    
+   
    
  <text x="50%" y="60%"  text-anchor="middle"  >
    TTSFC
    MUTAH
   
  </text>
+ 
  </svg>
 </div>
+
+
   <!-- <div id="container">
     <span id="text1"></span>
     <span id="text2"></span>
@@ -405,7 +437,17 @@ $type = $_SESSION['type'];
           }
           animateComplete = false;
         }
-    
+        
+        if (document.getElementById('state5')) {
+            const countUp4 = new CountUp('state5', document.getElementById("state5").getAttribute("countTo"));
+            if (!countUp4.error) {
+              countUp4.start();
+            } else {
+              console.error(countUp4.error);
+            };
+          }
+          animateComplete = false;
+        
     // }
 
     if (document.getElementById('typed')) {
@@ -421,96 +463,6 @@ $type = $_SESSION['type'];
   </script>
 
 
-<script>
-const elts = {
-    text1: document.getElementById("text1"),
-    text2: document.getElementById("text2")
-};
-
-const texts = [
-    "If",
-    "You",
-    "Like",
-    "It",
-    "Please",
-    "Give",
-    "a Love",
-    ":)",
-    "by @DotOnion"
-];
-
-const morphTime = 1;
-const cooldownTime = 0.25;
-
-let textIndex = texts.length - 1;
-let time = new Date();
-let morph = 0;
-let cooldown = cooldownTime;
-
-elts.text1.textContent = texts[textIndex % texts.length];
-elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-
-function doMorph() {
-    morph -= cooldown;
-    cooldown = 0;
-
-    let fraction = morph / morphTime;
-
-    if (fraction > 1) {
-        cooldown = cooldownTime;
-        fraction = 1;
-    }
-
-    setMorph(fraction);
-}
-
-function setMorph(fraction) {
-    elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    fraction = 1 - fraction;
-    elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    elts.text1.textContent = texts[textIndex % texts.length];
-    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-}
-
-function doCooldown() {
-    morph = 0;
-
-    elts.text2.style.filter = "";
-    elts.text2.style.opacity = "100%";
-
-    elts.text1.style.filter = "";
-    elts.text1.style.opacity = "0%";
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    let newTime = new Date();
-    let shouldIncrementIndex = cooldown > 0;
-    let dt = (newTime - time) / 1000;
-    time = newTime;
-
-    cooldown -= dt;
-
-    if (cooldown <= 0) {
-        if (shouldIncrementIndex) {
-            textIndex++;
-        }
-
-        doMorph();
-    } else {
-        doCooldown();
-    }
-}
-
-animate();
-
-
-  </script>
 
   <?php
 include('includes/scripts.php');

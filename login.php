@@ -24,7 +24,7 @@
                         <?php echo $majorOptions; ?>
                     </select>
                 </section>
-                <button id="Signup">Sign Up</button>
+                <!-- <button id="Signup">Sign Up</button> -->
             </form>
         </div>
         <div class="form-container sign-in">
@@ -49,7 +49,7 @@
                     <h1>Hello!</h1>
                     <p>Time Table System For Courses</p>
                     <img src="Picture1.png" class="image-logo" style="border-radius: 17%;">
-                    <button class="hidden" id="register">Sign Up</button>
+                    <!-- <button class="hidden" id="register">Sign Up</button> -->
                 </div>
             </div>
         </div>
