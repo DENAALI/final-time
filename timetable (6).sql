@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2024 at 08:32 AM
+-- Generation Time: Jun 11, 2024 at 06:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -152,78 +152,54 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`id`, `subject_id`, `subject_name`, `section`, `techer`, `time`, `day`, `hall`, `student_num`) VALUES
-(1496, 2211121, 'Introduction to Programming', '1', NULL, '10_11', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
-(1497, 2211121, 'Introduction to Programming', '2', NULL, '11_12', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
-(1498, 2211121, 'Introduction to Programming', '3', NULL, '12_13', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
-(1499, 2211121, 'Introduction to Programming', '4', NULL, '10_11', 'Sunday-Tuesday-Thursday', '202', 50),
-(1500, 2211121, 'Introduction to Programming', '5', NULL, '11_12', 'Sunday-Tuesday-Thursday', '202', 50),
-(1501, 2211121, 'Introduction to Programming', '6', NULL, '12_13', 'Sunday-Tuesday-Thursday', '202', 50),
-(1502, 2211122, 'Introduction to Programming lab', '1', NULL, '8_10', 'Sunday', 'lab', 50),
-(1503, 2211122, 'Introduction to Programming lab', '2', NULL, '12_14', 'Tuesday', 'lab', 50),
-(1504, 2211122, 'Introduction to Programming lab', '3', NULL, '8_10', 'Thursday', 'lab', 50),
-(1505, 2211122, 'Introduction to Programming lab', '4', NULL, '12_14', 'Sunday', 'lab', 50),
-(1506, 2211122, 'Introduction to Programming lab', '5', NULL, '8_10', 'Tuesday', 'lab', 50),
-(1507, 2211122, 'Introduction to Programming lab', '6', NULL, '12_14', 'Thursday', 'lab', 50),
-(1508, 2211211, 'Data structures\r\n', '1', NULL, '10_11', 'Sunday-Tuesday-Thursday', '203', 30),
-(1509, 2211211, 'Data structures\r\n', '2', NULL, '11_12', 'Sunday-Tuesday-Thursday', '203', 30),
-(1510, 2211211, 'Data structures\r\n', '3', NULL, '12_13', 'Sunday-Tuesday-Thursday', '203', 30),
-(1511, 2211212, 'Algorithms', '1', NULL, '11_12', 'Sunday-Tuesday-Thursday', '204', 50),
-(1512, 2211212, 'Algorithms', '2', NULL, '12_13', 'Sunday-Tuesday-Thursday', '204', 50),
-(1513, 2211212, 'Algorithms', '3', NULL, '13_14', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
-(1514, 2211214, 'Algorithms Lab', '1', NULL, '8_10', 'Sunday', 'lab2', 35),
-(1515, 2211214, 'Algorithms Lab', '2', NULL, '12_14', 'Tuesday', 'lab2', 50),
-(1516, 2211214, 'Algorithms Lab', '3', NULL, '8_10', 'Thursday', 'lab2', 50),
-(1517, 2211261, 'Introduction to Databases', '1', NULL, '12_13', 'Sunday-Tuesday-Thursday', '205', 45),
-(1518, 2211261, 'Introduction to Databases', '2', NULL, '13_14', 'Sunday-Tuesday-Thursday', '202', 45),
-(1519, 2211261, 'Introduction to Databases', '3', NULL, '10_11', 'Sunday-Tuesday-Thursday', '204', 15),
-(1520, 2211262, 'Introduction to Databases Lab', '1', NULL, '12_14', 'Sunday', 'lab2', 45),
-(1521, 2211262, 'Introduction to Databases Lab', '2', NULL, '14_16', 'Tuesday', 'lab', 45),
-(1522, 2211262, 'Introduction to Databases Lab', '3', NULL, '14_16', 'Thursday', 'lab', 15),
-(1523, 2211263, 'Database Programming', '1', NULL, '13_14', 'Sunday-Tuesday-Thursday', '203', 24),
-(1524, 2211263, 'Database Programming', '2', NULL, '10_11', 'Sunday-Tuesday-Thursday', '205', 50),
-(1525, 2211263, 'Database Programming', '3', NULL, '11_12', 'Sunday-Tuesday-Thursday', '205', 50),
-(1526, 2211263, 'Database Programming', '4', NULL, '10_11', 'Sunday-Tuesday-Thursday', '101', 50),
-(1527, 2211263, 'Database Programming', '5', NULL, '11_12', 'Sunday-Tuesday-Thursday', '101', 50),
-(1528, 2211263, 'Database Programming', '6', NULL, '12_13', 'Sunday-Tuesday-Thursday', '101', 10),
-(1529, 2211351, 'Computer Networks', '1', NULL, '8-9:30', 'Monday-Wednesday', 'IT_5', 50),
-(1530, 2211351, 'Computer Networks', '2', NULL, '9:30_11', 'Monday-Wednesday', 'IT_5', 20),
-(1531, 2211361, 'Computer Graphics', '1', NULL, '9:30_11', 'Monday-Wednesday', '202', 0),
-(1532, 2211431, 'Operating Systems', '1', NULL, '11_12:30', 'Monday-Wednesday', 'IT_5', 33),
-(1533, 2211431, 'Operating Systems', '2', NULL, '11_12:30', 'Monday-Wednesday', '202', 33),
-(1534, 2211362, 'Digital Image Processing', '1', NULL, '8-9:30', 'Monday-Wednesday', '202', 0),
-(1535, 2211491, 'Graduation Project (1)', '1', NULL, '9:30_11', 'Monday-Wednesday', '203', 0),
-(1536, 2231101, 'Computer Ethics and Communication Skills', '1', NULL, '10_11', 'Sunday-Tuesday-Thursday', '102', 50),
-(1537, 2231101, 'Computer Ethics and Communication Skills', '2', NULL, '11_12', 'Sunday-Tuesday-Thursday', '102', 50),
-(1538, 2231101, 'Computer Ethics and Communication Skills', '3', NULL, '12_13', 'Sunday-Tuesday-Thursday', '102', 50),
-(1539, 2231101, 'Computer Ethics and Communication Skills', '4', NULL, '10_11', 'Sunday-Tuesday-Thursday', '103', 50),
-(1540, 2231101, 'Computer Ethics and Communication Skills', '5', NULL, '11_12', 'Sunday-Tuesday-Thursday', '103', 50),
-(1541, 2231101, 'Computer Ethics and Communication Skills', '6', NULL, '12_13', 'Sunday-Tuesday-Thursday', '103', 50),
-(1542, 2231261, 'Fundamentals of Software Engineering', '1', NULL, '10_11', 'Sunday-Tuesday-Thursday', '104', 50),
-(1543, 2231261, 'Fundamentals of Software Engineering', '2', NULL, '11_12', 'Sunday-Tuesday-Thursday', '104', 50),
-(1544, 2231221, 'Requirements Engineering', '1', NULL, '8-9:30', 'Monday-Wednesday', '203', 0),
-(1545, 2231341, 'Software Modeling ', '1', NULL, '8-9:30', 'Monday-Wednesday', '204', 0),
-(1546, 2231442, 'Software Development Lab', '1', NULL, '8_10', 'Monday', 'lab', 0),
-(1547, 2231443, 'Software Quality Assurance and Inspection', '1', NULL, '9:30_11', 'Monday-Wednesday', '204', 0),
-(1548, 2231491, 'Graduation Project (1)', '1', NULL, '11_12:30', 'Monday-Wednesday', '203', 0),
-(1549, 2222111, 'Discontinuous computing structures', '1', 'non', '10_11', 'Sunday-Tuesday-Thursday', 'hall1', 50),
-(1550, 2222111, 'Discontinuous computing structures', '2', 'non', '11_12', 'Sunday-Tuesday-Thursday', 'hall1', 50),
-(1551, 2222111, 'Discontinuous computing structures', '3', 'non', '12_13', 'Sunday-Tuesday-Thursday', '104', 50),
-(1552, 2222111, 'Discontinuous computing structures', '4', 'non', '10_11', 'Sunday-Tuesday-Thursday', '', 50),
-(1553, 2222111, 'Discontinuous computing structures', '5', 'non', '11_12', 'Sunday-Tuesday-Thursday', '', 50),
-(1554, 2222111, 'Discontinuous computing structures', '6', 'non', '12_13', 'Sunday-Tuesday-Thursday', 'hall1', 50),
-(1555, 2221321, 'Visual Programming', '1', 'non', '8-9:30', 'Monday-Wednesday', '205', 50),
-(1556, 2221321, 'Visual Programming', '2', 'non', '9:30_11', 'Monday-Wednesday', '205', 50),
-(1557, 2221321, 'Visual Programming', '3', 'non', '11_12:30', 'Monday-Wednesday', '204', 20),
-(1558, 2221362, 'Software Project Management', '1', 'non', '9:30_11', 'Monday-Wednesday', '101', 0),
-(1559, 2221491, 'Graduation Project 1', '1', 'non', '8-9:30', 'Monday-Wednesday', '101', 0),
-(1560, 2222261, 'Introduction to Artificial Intelligence', '1', 'non', '9:30_11', 'Monday-Wednesday', '102', 0),
-(1561, 2222362, ' Introduction to Artificial Intelligence lab', '1', 'non', '8_10', 'Monday', 'lab2', 0),
-(1562, 2211263, 'Database Programming', '7', NULL, '', '', '', 26),
-(1563, 2211214, 'Algorithms Lab', '4', NULL, '', 'Sunday', '', 15),
-(1564, 2211261, 'Introduction to Databases', '4', NULL, '11_12', 'Sunday-Tuesday-Thursday', 'halllab1', 15),
-(1565, 2211262, 'Introduction to Databases Lab', '4', NULL, '', 'Sunday', '', 15),
-(1566, 2211431, 'Operating Systems', '3', NULL, '11_12', 'Monday-Wednesday', 'halllab1', 34),
-(1567, 2211211, 'Data structures\r\n', '4', NULL, '13_14', 'Sunday-Tuesday-Thursday', 'halllab1', 30);
+(3589, 2211121, 'Introduction to Programming', '1', 'non', '10_11', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
+(3590, 2211121, 'Introduction to Programming', '2', 'non', '11_12', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
+(3591, 2211121, 'Introduction to Programming', '3', 'non', '12_13', 'Sunday-Tuesday-Thursday', 'IT_5', 50),
+(3592, 2211122, 'Introduction to Programming lab', '1', 'non', '8_10', 'Sunday', 'lab', 50),
+(3593, 2211122, 'Introduction to Programming lab', '2', 'non', '12_14', 'Tuesday', 'lab', 50),
+(3594, 2211122, 'Introduction to Programming lab', '3', 'non', '8_10', 'Thursday', 'lab', 50),
+(3595, 2211211, 'Data structures\r\n', '1', 'non', '10_11', 'Sunday-Tuesday-Thursday', '202', 50),
+(3596, 2211211, 'Data structures\r\n', '2', 'non', '11_12', 'Sunday-Tuesday-Thursday', '202', 50),
+(3597, 2211211, 'Data structures\r\n', '3', 'non', '12_13', 'Sunday-Tuesday-Thursday', '202', 20),
+(3598, 2211212, 'Algorithms', '1', 'non', '11_12', 'Sunday-Tuesday-Thursday', '203', 0),
+(3599, 2211214, 'Algorithms Lab', '1', 'non', '8_10', 'Sunday', 'lab2', 50),
+(3600, 2211214, 'Algorithms Lab', '2', 'non', '12_14', 'Tuesday', 'lab2', 50),
+(3601, 2211214, 'Algorithms Lab', '3', 'non', '8_10', 'Thursday', 'lab2', 50),
+(3602, 2211261, 'Introduction to Databases', '1', 'non', '12_13', 'Sunday-Tuesday-Thursday', '203', 50),
+(3603, 2211261, 'Introduction to Databases', '2', 'non', '12_13', 'Sunday-Tuesday-Thursday', '204', 50),
+(3604, 2211261, 'Introduction to Databases', '3', 'non', '13_14', 'Sunday-Tuesday-Thursday', 'IT_5', 20),
+(3605, 2211262, 'Introduction to Databases Lab', '1', 'non', '12_14', 'Sunday', 'lab', 50),
+(3606, 2211262, 'Introduction to Databases Lab', '2', 'non', '14_16', 'Tuesday', 'lab', 50),
+(3607, 2211262, 'Introduction to Databases Lab', '3', 'Mrs. Asmaa Nawaiseh', '14_16', 'Thursday', 'lab', 20),
+(3608, 2211263, 'Database Programming', '1', 'non', '13_14', 'Sunday-Tuesday-Thursday', '202', 50),
+(3609, 2211263, 'Database Programming', '2', 'non', '13_14', 'Sunday-Tuesday-Thursday', '203', 50),
+(3610, 2211263, 'Database Programming', '3', 'non', '10_11', 'Sunday-Tuesday-Thursday', '203', 50),
+(3611, 2211263, 'Database Programming', '4', 'non', '10_11', 'Sunday-Tuesday-Thursday', '204', 50),
+(3612, 2211263, 'Database Programming', '5', 'prof. Bassam Mahadin', '10_11', 'Sunday-Tuesday-Thursday', '205', 50),
+(3613, 2211263, 'Database Programming', '6', 'non', '10_11', 'Sunday-Tuesday-Thursday', '101', 10),
+(3614, 2211351, 'Computer Networks', '1', 'Dr. hayat dmour', '8_9:30', 'Monday-Wednesday', 'IT_5', 50),
+(3615, 2211351, 'Computer Networks', '2', 'Dr. Rania Al-Halaseh', '9:30_11', 'Monday-Wednesday', 'IT_5', 20),
+(3616, 2211361, 'Computer Graphics', '1', 'non', '9:30_11', 'Monday-Wednesday', '202', 0),
+(3617, 2211431, 'Operating Systems', '1', 'non', '11_12:30', 'Monday-Wednesday', 'IT_5', 0),
+(3618, 2211362, 'Digital Image Processing', '1', 'non', '8_9:30', 'Monday-Wednesday', '202', 0),
+(3619, 2231101, 'Computer Ethics and Communication Skills', '1', NULL, '11_12', 'Sunday-Tuesday-Thursday', '204', 50),
+(3620, 2231101, 'Computer Ethics and Communication Skills', '2', NULL, '12_13', 'Sunday-Tuesday-Thursday', '205', 50),
+(3621, 2231101, 'Computer Ethics and Communication Skills', '3', NULL, '13_14', 'Sunday-Tuesday-Thursday', '204', 50),
+(3622, 2231261, 'Fundamentals of Software Engineering', '1', NULL, '10_11', 'Sunday-Tuesday-Thursday', '102', 50),
+(3623, 2231261, 'Fundamentals of Software Engineering', '2', NULL, '11_12', 'Sunday-Tuesday-Thursday', '205', 50),
+(3624, 2231221, 'Requirements Engineering', '1', NULL, '8_9:30', 'Monday-Wednesday', '203', 0),
+(3625, 2231341, 'Software Modeling ', '1', NULL, '8_9:30', 'Monday-Wednesday', '204', 0),
+(3626, 2231442, 'Software Development Lab', '1', NULL, '8_10', 'Monday', 'lab', 0),
+(3627, 2231443, 'Software Quality Assurance and Inspection', '1', NULL, '9:30_11', 'Monday-Wednesday', '203', 0),
+(3628, 2222111, 'Discontinuous computing structures', '1', NULL, '12_13', 'Sunday-Tuesday-Thursday', '101', 50),
+(3629, 2222111, 'Discontinuous computing structures', '2', NULL, '13_14', 'Sunday-Tuesday-Thursday', '205', 50),
+(3630, 2222111, 'Discontinuous computing structures', '3', NULL, '10_11', 'Sunday-Tuesday-Thursday', '103', 40),
+(3631, 2221321, 'Visual Programming', '1', NULL, '8_9:30', 'Monday-Wednesday', '205', 50),
+(3632, 2221321, 'Visual Programming', '2', NULL, '9:30_11', 'Monday-Wednesday', '204', 50),
+(3633, 2221321, 'Visual Programming', '3', NULL, '11_12:30', 'Monday-Wednesday', '202', 20),
+(3634, 2221362, 'Software Project Management', '1', NULL, '9:30_11', 'Monday-Wednesday', '205', 0),
+(3635, 2222261, 'Introduction to Artificial Intelligence', '1', NULL, '8_9:30', 'Monday-Wednesday', '101', 0),
+(3636, 2222362, ' Introduction to Artificial Intelligence lab', '1', NULL, '8_10', 'Monday', 'lab2', 0);
 
 -- --------------------------------------------------------
 
@@ -260,25 +236,21 @@ CREATE TABLE `statistics` (
 --
 
 INSERT INTO `statistics` (`id`, `subject_name`, `subject_num`, `subject_type`, `num_of_study`, `pre_subsnum`) VALUES
-(222, 'ethics', 2231101, 'theoretical', 300, NULL),
-(223, 'c++', 2211121, 'theoretical', 300, NULL),
-(224, 'lab c++', 2211122, 'laboratory', 300, NULL),
-(225, 'descret', 2222111, 'theoretical', 300, NULL),
+(222, 'ethics', 2231101, 'theoretical', 150, NULL),
+(223, 'c++', 2211121, 'theoretical', 150, NULL),
+(224, 'lab c++', 2211122, 'laboratory', 150, NULL),
+(225, 'descret', 2222111, 'theoretical', 140, NULL),
 (226, 'IT', 2221111, 'theoretical', 300, NULL),
 (227, 'OOP', 2211123, 'theoretical', 150, NULL),
 (228, 'Lab OOP', 2211124, 'laboratory', 150, NULL),
 (229, 'logic', 405131, 'theoretical', 190, NULL),
 (230, 'DB', 2211261, 'theoretical', 120, NULL),
 (231, 'lab DB', 2211262, 'laboratory', 120, NULL),
-(232, 'Computer architecture', 405231, 'theoretical', 250, NULL),
 (233, 'DS', 2211211, 'theoretical', 120, NULL),
 (234, 'introduction to SE', 2231261, 'theoretical', 100, NULL),
-(235, 'php', 2221223, 'theoretical', 150, NULL),
-(236, 'algorithm', 2211212, 'theoretical', 150, NULL),
 (237, 'lab algorithm', 2211214, 'laboratory', 150, NULL),
 (238, 'oracl', 2211263, 'theoretical', 260, NULL),
 (239, 'vb', 2211351, 'theoretical', 70, NULL),
-(240, 'os', 2211431, 'theoretical', 100, NULL),
 (241, 'networks', 2221321, 'theoretical', 120, NULL);
 
 -- --------------------------------------------------------
@@ -318,12 +290,12 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `year`, `semester`, `major_id`, `subject_id`, `pre_sub_num`, `name`, `type_name`, `Capacity`) VALUES
-(9, 1, 1, 1, 2211121, 2211121, 'Introduction to Programming', 'theoretical', 50),
-(10, 1, 1, 1, 2211122, 2211122, 'Introduction to Programming lab', 'laboratory', 50),
-(11, 1, 2, 1, 2211123, 2211123, 'Object-oriented programming', 'theoretical', 50),
+(9, 1, 1, 1, 2211121, 0, 'Introduction to Programming', 'theoretical', 50),
+(10, 1, 1, 1, 2211122, 2211121, 'Introduction to Programming lab', 'laboratory', 50),
+(11, 1, 2, 1, 2211123, 2211121, 'Object-oriented programming', 'theoretical', 50),
 (12, 1, 2, 1, 2211124, 2211124, 'Object-oriented programming lab', 'laboratory', 50),
-(19, 1, 1, 1, 2231101, 2211121, 'Computer Ethics and Communication Skills', 'theoretical', 50),
-(20, 1, 1, 1, 2222111, 2211121, 'Discontinuous computing structures\r\n', 'theoretical', 50),
+(19, 1, 1, 1, 2231101, 0, 'Computer Ethics and Communication Skills', 'theoretical', 50),
+(20, 1, 1, 1, 2222111, 0, 'Discontinuous computing structures\r\n', 'theoretical', 50),
 (21, 1, 1, 1, 2221111, 2211121, 'Introduction to Information Technology', 'theoretical', 50),
 (22, 2, 1, 1, 2211261, 2211123, 'Introduction to Databases', 'theoretical', 50),
 (23, 2, 1, 1, 2211262, 2211261, 'Introduction to Databases Lab', 'laboratory', 50),
@@ -349,10 +321,10 @@ INSERT INTO `subjects` (`id`, `year`, `semester`, `major_id`, `subject_id`, `pre
 (43, 4, 2, 1, 2211451, 2211351, 'Wireless Computer Networks', 'theoretical', 50),
 (44, 4, 2, 1, 2221462, 2222261, 'Distributed and parallel systems', 'theoretical', 50),
 (45, 4, 2, 1, 2211492, 2211491, 'Graduation Project (2)', 'theoretical', 50),
-(46, 1, 1, 3, 2231101, 2211121, 'Computer Ethics and Communication Skills', 'theoretical', 50),
-(47, 1, 1, 3, 2211121, 2211121, 'Introduction to Programming', 'theoretical', 50),
+(46, 1, 1, 3, 2231101, 0, 'Computer Ethics and Communication Skills', 'theoretical', 50),
+(47, 1, 1, 3, 2211121, 0, 'Introduction to Programming', 'theoretical', 50),
 (48, 1, 1, 3, 2211122, 2211121, ' Introduction to Programming lab', 'laboratory', 50),
-(49, 1, 1, 3, 2222111, 2211121, 'Discontinuous computing structures', 'theoretical', 50),
+(49, 1, 1, 3, 2222111, 0, 'Discontinuous computing structures', 'theoretical', 50),
 (50, 1, 1, 3, 2202111, 2211121, 'Introduction to Information Technology', 'theoretical', 50),
 (51, 1, 2, 3, 2211123, 2211121, 'Object-oriented programming', 'theoretical', 50),
 (52, 1, 2, 3, 2211214, 2211123, ' Object-oriented programming lab', 'laboratory', 50),
@@ -385,10 +357,10 @@ INSERT INTO `subjects` (`id`, `year`, `semester`, `major_id`, `subject_id`, `pre
 (79, 4, 2, 3, 2221471, 2221363, 'New innovations for information systems technology', 'theoretical', 50),
 (80, 4, 2, 3, 2221442, 2221361, 'data warehouse', 'theoretical', 50),
 (81, 4, 2, 3, 2221492, 3331491, 'Graduation Project 2', 'theoretical', 50),
-(82, 1, 1, 2, 2231101, 2211121, 'Computer Ethics and Communication Skills', 'theoretical', 50),
-(83, 1, 1, 2, 2211121, 2211121, 'Introduction to Programming', 'theoretical', 50),
+(82, 1, 1, 2, 2231101, 0, 'Computer Ethics and Communication Skills', 'theoretical', 50),
+(83, 1, 1, 2, 2211121, 0, 'Introduction to Programming', 'theoretical', 50),
 (84, 1, 1, 2, 2211122, 2211121, 'Introduction to Programming lab', 'laboratory', 50),
-(85, 1, 1, 2, 2222111, 2211121, 'Discontinuous computing structures', 'theoretical', 50),
+(85, 1, 1, 2, 2222111, 0, 'Discontinuous computing structures', 'theoretical', 50),
 (86, 1, 1, 2, 2221111, 2211121, 'Introduction to Information Technology', 'theoretical', 50),
 (87, 1, 2, 2, 2211123, 2211121, 'Object-oriented programming ', 'theoretical', 50),
 (88, 1, 2, 2, 2211124, 2211123, 'Object-oriented programming lab', 'laboratory', 50),
@@ -419,7 +391,7 @@ INSERT INTO `subjects` (`id`, `year`, `semester`, `major_id`, `subject_id`, `pre
 (113, 4, 2, 2, 2231421, 2231331, 'Software Maintenance & Development', 'theoretical', 50),
 (114, 4, 2, 2, 2231361, 2231221, 'Software Engineering for Web Applications', 'theoretical', 50),
 (115, 4, 2, 2, 2231492, 2231491, 'Graduation Project (2)', 'theoretical', 50),
-(116, 1, 1, 3, 2211121, 2211121, 'Introduction to Programming', 'theoretical', 50),
+(116, 1, 1, 3, 2211121, 0, 'Introduction to Programming', 'theoretical', 50),
 (117, 3, 1, 2, 2221362, 2231261, 'Software Project Management', 'theoretical', 50);
 
 -- --------------------------------------------------------
@@ -439,83 +411,6 @@ CREATE TABLE `summer` (
   `teacher` varchar(100) DEFAULT NULL,
   `students` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `summer`
---
-
-INSERT INTO `summer` (`id`, `course_id`, `course_name`, `section`, `time`, `day`, `room`, `teacher`, `students`) VALUES
-(72, '2231101', 'ethics', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(73, '2231101', 'ethics', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(74, '2231101', 'ethics', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(75, '2231101', 'ethics', 4, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(76, '2231101', 'ethics', 5, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(77, '2231101', 'ethics', 6, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(78, '2211121', 'c++', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'prof. Bassam Mahadin', 50),
-(79, '2211121', 'c++', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'prof. Bassam Mahadin', 50),
-(80, '2211121', 'c++', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'prof. Bassam Mahadin', 50),
-(81, '2211121', 'c++', 4, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'prof. Ahmed Hassanat', 50),
-(82, '2211121', 'c++', 5, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'Dr. hayat dmour', 50),
-(83, '2211121', 'c++', 6, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '202', 'Dr. hayat dmour', 50),
-(84, '2211122', 'lab c++', 1, '08:00-09:30 ', 'Monday-Wednesday', 'lab', 'Mrs.roba al-soub', 50),
-(85, '2211122', 'lab c++', 2, '09:30-11:00 ', 'Monday-Wednesday', 'lab', 'Mrs.roba al-soub', 50),
-(86, '2211122', 'lab c++', 3, '11:00-12:30 ', 'Monday-Wednesday', 'lab', 'Mr.Moataz Al-Mubaideen', 50),
-(87, '2211122', 'lab c++', 4, '12:30-14:00 ', 'Monday-Wednesday', 'lab', 'Mr.Moataz Al-Mubaideen', 50),
-(88, '2211122', 'lab c++', 5, '14:00-15:30 ', 'Monday-Wednesday', 'lab', 'Dr. moaath hajaya', 50),
-(89, '2211122', 'lab c++', 6, '15:30-17:00 ', 'Monday-Wednesday', 'lab', 'non', 50),
-(90, '2222111', 'descret', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(91, '2222111', 'descret', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(92, '2222111', 'descret', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(93, '2222111', 'descret', 4, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(94, '2222111', 'descret', 5, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(95, '2222111', 'descret', 6, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '203', NULL, 50),
-(96, '2221111', 'IT', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(97, '2221111', 'IT', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(98, '2221111', 'IT', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(99, '2221111', 'IT', 4, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(100, '2221111', 'IT', 5, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(101, '2221111', 'IT', 6, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '204', NULL, 50),
-(102, '2211123', 'OOP', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '205', 'prof. Ahmed Hassanat', 50),
-(103, '2211123', 'OOP', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '205', 'prof. Ahmed Hassanat', 50),
-(104, '2211123', 'OOP', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '205', 'Mrs.roba al-soub', 50),
-(105, '2211124', 'Lab OOP', 1, '08:00-09:30 ', 'Monday-Wednesday', 'lab2', 'Mr.Moataz Al-Mubaideen', 50),
-(106, '2211124', 'Lab OOP', 2, '09:30-11:00 ', 'Monday-Wednesday', 'lab2', 'Mr.Moataz Al-Mubaideen', 50),
-(107, '2211124', 'Lab OOP', 3, '11:00-12:30 ', 'Monday-Wednesday', 'lab2', 'Mrs.roba al-soub', 50),
-(108, '405131', 'logic', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '101', NULL, 48),
-(109, '405131', 'logic', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '101', NULL, 48),
-(110, '405131', 'logic', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '101', NULL, 47),
-(111, '405131', 'logic', 4, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '205', NULL, 47),
-(112, '2211261', 'DB', 1, '08:00-09:15 ', 'Sunday-Monday-Tuesday-Wednesday', '102', 'Dr. hayat dmour', 40),
-(113, '2211261', 'DB', 2, '09:15-10:30 ', 'Sunday-Monday-Tuesday-Wednesday', '102', 'Dr. hayat dmour', 40),
-(114, '2211261', 'DB', 3, '10:30-11:45 ', 'Sunday-Monday-Tuesday-Wednesday', '102', 'Dr.Afaf Al-Tarief', 40),
-(115, '2211262', 'lab DB', 1, '08:00-09:30 ', 'Monday-Wednesday', 'lab3', 'Mrs. Wafaa Tarawneh', 40),
-(116, '2211262', 'lab DB', 2, '09:30-11:00 ', 'Monday-Wednesday', 'lab3', 'Dr.anas alkasasba', 40),
-(117, '2211262', 'lab DB', 3, '11:00-12:30 ', 'Monday-Wednesday', 'lab3', 'non', 40),
-(118, '405231', 'Computer architecture', 1, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '101', NULL, 50),
-(119, '405231', 'Computer architecture', 2, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '205', NULL, 50),
-(120, '405231', 'Computer architecture', 3, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '205', NULL, 50),
-(121, '405231', 'Computer architecture', 4, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(122, '405231', 'Computer architecture', 5, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', 'IT_5', NULL, 50),
-(123, '2211211', 'DS', 1, '11:45-13:00 ', 'Sunday-Monday-Tuesday-Wednesday', '102', 'prof. Bassam Mahadin', 40),
-(124, '2211211', 'DS', 2, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '101', 'Dr.Afaf Al-Tarief', 40),
-(125, '2211211', 'DS', 3, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '101', 'Dr.Afaf Al-Tarief', 40),
-(126, '2231261', 'introduction to SE', 1, '13:00-14:15 ', 'Sunday-Monday-Tuesday-Wednesday', '102', NULL, 50),
-(127, '2231261', 'introduction to SE', 2, '14:15-15:30 ', 'Sunday-Monday-Tuesday-Wednesday', '102', NULL, 50),
-(128, '2221223', 'php', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '202', NULL, 50),
-(129, '2221223', 'php', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '202', NULL, 50),
-(130, '2211212', 'algorithm', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '203', 'Dr. hayat dmour', 50),
-(131, '2211212', 'algorithm', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '203', 'Dr.Afaf Al-Tarief', 50),
-(132, '2211214', 'lab algorithm', 1, '12:30-14:00 ', 'Monday-Wednesday', 'lab2', 'Mrs.roba al-soub', 50),
-(133, '2211214', 'lab algorithm', 2, '14:00-15:30 ', 'Monday-Wednesday', 'lab2', 'Mrs.roba al-soub', 50),
-(134, '2211214', 'lab algorithm', 3, '15:30-17:00 ', 'Monday-Wednesday', 'lab2', 'Mr.Moataz Al-Mubaideen', 50),
-(135, '2211263', 'oracl', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '204', 'Dr.Afaf Al-Tarief', 44),
-(136, '2211263', 'oracl', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '204', 'Dr.anas alkasasba', 44),
-(137, '2211351', 'vb', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '205', 'Dr.anas alkasasba', 35),
-(138, '2211351', 'vb', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '205', 'Mrs.roba al-soub', 35),
-(139, '2211431', 'os', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '101', 'Mr.Moataz Al-Mubaideen', 50),
-(140, '2211431', 'os', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '101', 'Dr.obada alhabashneh', 50),
-(141, '2221321', 'networks', 1, '15:30-16:45 ', 'Sunday-Monday-Tuesday-Wednesday', '102', NULL, 40),
-(142, '2221321', 'networks', 2, '16:45-18:00 ', 'Sunday-Monday-Tuesday-Wednesday', '102', NULL, 40);
 
 -- --------------------------------------------------------
 
@@ -998,7 +893,7 @@ ALTER TABLE `report_teacher`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1568;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3637;
 
 --
 -- AUTO_INCREMENT for table `section`
@@ -1028,7 +923,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `summer`
 --
 ALTER TABLE `summer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
 
 --
 -- AUTO_INCREMENT for table `teacher`

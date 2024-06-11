@@ -28,7 +28,7 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #4e73df;
 }
  h1 img {
  display: inline-block;
@@ -93,8 +93,8 @@ th {
                 '14_15:30',
                 '15:30_17',
                 ];
-            $select='SELECT * FROM `schedule` GROUP by techer'; 
-            
+            $select="SELECT * FROM `schedule` where subject_id not like '%Lab' or subject_id not like '%LAB' or subject_id not like '%lab'  GROUP by techer"; 
+            $select_hall="";
             $result=mysqli_query($conn,$select);   
             while($row=mysqli_fetch_assoc($result)){
                 if($row['techer']=='non'||$row['techer']==null)

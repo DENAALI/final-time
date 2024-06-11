@@ -23,7 +23,9 @@ $semester = $_POST['semester'];
 // echo $semester;
 // echo '<br>';
 // تحويل الأوقات النصية إلى أرقام
+
 function timeToNumber($time) {
+    // echo $time;
     $parts = explode('_', $time);
     // echo intval($parts[0]) ;
     return intval($parts[1]);
