@@ -1,6 +1,16 @@
+
 <?php
+$course_duration = 75 * 60;
+$start='12:30-14:00';
+$start_time = strtotime(explode('-', $start)[0]);
+                                        $end_time = $start_time + $course_duration;
+                                        echo  $start_time . ' minutes'.$start;
+                                        echo  $end_time . ' minutes'.$start;
+?>
+
+<!-- <?php
 $servername = "localhost";
-$username = "root";
+$username = "root"; 
 $password = "";
 $dbname = "university_schedule";
 
@@ -69,4 +79,4 @@ $sql = "DELETE FROM section WHERE id = {$last_section['id']}";
 
 // Close the connection
 $conn->close();
-?>
+?> -->

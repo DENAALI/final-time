@@ -39,14 +39,14 @@
                 $days_theory = 'Sunday-Monday-Tuesday-Wednesday';
                 $days_lab = 'Monday-Wednesday';
                 $time_slots_theory = [
-                    ['start' => '08:00', 'end' => '09:15'],
-                    ['start' => '09:15', 'end' => '10:30'],
+                    
                     ['start' => '10:30', 'end' => '11:45'],
                     ['start' => '11:45', 'end' => '13:00'],
                     ['start' => '13:00', 'end' => '14:15'],
                     ['start' => '14:15', 'end' => '15:30'],
                     ['start' => '15:30', 'end' => '16:45'],
-                    ['start' => '16:45', 'end' => '18:00'],
+                    ['start' => '08:00', 'end' => '09:15'],
+                    ['start' => '09:15', 'end' => '10:30'],
                 ];
                 $time_slots_lab = [
                     ['start' => '08:00', 'end' => '09:30'],
@@ -74,19 +74,19 @@
                                 if ($room['type'] == 'lab' && is_room_available($schedule, $room['name'], $days_lab, $time_slot)) {
                                     $flag=false;
                                     $i=0;
-                                    foreach ($schedule as $entry) {
-                                        if($time_slot['start'] . '-' . $time_slot['end']==$entry['Time']){
-                                            $i++;
-                                        }
-                                        if((substr($entry['Time'],0,3)==substr($time_slot['start'],0,3))&&($group_count + 1)==$entry['Section']){
-                                            $flag=true;
-                                        }
-                                    }
-                                    if($flag){
-                                        $time_slot = $time_slots_lab[$slot_index+1];
-                                    }
-                                    if($i>=3)
-                                    continue;
+                                    // foreach ($schedule as $entry) {
+                                    //     if($time_slot['start'] . '-' . $time_slot['end']==$entry['Time']){
+                                    //         $i++;
+                                    //     }
+                                    //     if((substr($entry['Time'],0,3)==substr($time_slot['start'],0,3))&&($group_count + 1)==$entry['Section']){
+                                    //         $flag=true;
+                                    //     }
+                                    // }
+                                    // if($flag){
+                                    //     $time_slot = $time_slots_lab[$slot_index+1];
+                                    // }
+                                    // if($i>=3)
+                                    // continue;
                                 $schedule[] = [
                                     'Course ID' => $course['id'],
                                     'Course Name' => $course['name'],
@@ -111,22 +111,22 @@
                                 if ($room['type'] == 'normal' && is_room_available($schedule, $room['name'], $days_theory, $time_slot)) {
                                     $i=0;
                                     $flag=false;
-                                    foreach ($schedule as $entry) {
-                                        if($time_slot['start'] . '-' . $time_slot['end']==$entry['Time']){
-                                            $i++;
-                                        }
-                                        if((substr($entry['Time'],0,3)==substr($time_slot['start'],0,3))&&($group_count + 1)==$entry['Section']){
-                                            $flag=true;
-                                        }
+                                    // foreach ($schedule as $entry) {
+                                    //     if($time_slot['start'] . '-' . $time_slot['end']==$entry['Time']){
+                                    //         $i++;
+                                    //     }
+                                    //     if((substr($entry['Time'],0,3)==substr($time_slot['start'],0,3))&&($group_count + 1)==$entry['Section']){
+                                    //         $flag=true;
+                                    //     }
 
-                                    }
+                                    // }
                                     if($flag){
                                         $time_slot = $time_slots_theory[$slot_index+1];
                                     }
-                                    if($i>=7){
+                                    // if($i>=7){
                                         
-                                        continue;
-                                    }
+                                    //     continue;
+                                    // }
                                     $schedule[] = [
                                         'Course ID' => $course['id'],
                                         'Course Name' => $course['name'],

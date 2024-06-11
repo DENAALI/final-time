@@ -188,6 +188,11 @@ if (isset($_POST['major1'])) {
             echo "<button onclick='update(event," . $subject_id . ")' id='btnedit" . $subject_id . "' class='btn btn-primary ' style='' >delete 1 section</button>";
         // }
         echo "</td>";
+        echo "<td>";
+            // if ($row['sum'] != 0) {
+                echo "<button onclick='update1(event," . $subject_id . ")' id='btnadd" . $subject_id . "' class='btn btn-success ' style='' >add 1 section</button>";
+            // }
+            echo "</td>";
         echo "</tr>";
         $student_count=0;
     }

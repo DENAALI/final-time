@@ -243,7 +243,7 @@ while ($row = $result->fetch_assoc()) {
 
                $.ajax({
                    type: 'POST',
-                   url: 'php/summer.php',
+                   url: 'php/edit_summer.php',
                    data: {major1: major1,  semester1: semester1},
                    success: function(response) {
                        console.log(response); // تحقق من الاستجابة بعد النجاح
@@ -275,7 +275,8 @@ while ($row = $result->fetch_assoc()) {
 
    function update(event,id){
        event.preventDefault();
-     
+       var major1 = $("#major1").val();
+           var semester1 = $("#semester1").val();
         $.ajax({
                type: 'POST',
                url: 'php/update.php',
@@ -297,10 +298,6 @@ while ($row = $result->fetch_assoc()) {
                }
            });
      
-           
-        
-  
- 
   }
    function update1(event,id){
        event.preventDefault();
@@ -311,23 +308,45 @@ while ($row = $result->fetch_assoc()) {
                data: {id1:id,add:add},
                success: function(response) {
                    // console.log(document.getElementById('count'+id).innerHTML.replace(""));
-                   document.getElementById('count'+id).innerHTML=parseInt(document.getElementById('count'+id).innerHTML)+1;
-                   
+                   document.getElementById('count'+id).innerHTML=parseInt(document.getElementById('count'+id).innerHTML)+1;          
                    console.log(response);
-                //    if(response=='done1'){
-                //        document.getElementById('row'+id).remove();
-                //    }
-                   // console.log(major1); // تحقق من الاستجابة بعد النجاح
-                   // $('#count'+id).html(parseInt($('#count'+id).html)+1); 
-                   // document.getElementById('nextnext').style.display = 'block';
-
-                  
-
                }
            });
-        
-  
- 
+  }
+   function update_summer(event,id){
+       event.preventDefault();
+
+                $.ajax({
+                   type: 'POST',
+                   url: 'php/update_summer.php',
+                   data: {id1:id},
+                   success: function(response) {
+                       // console.log(document.getElementById('count'+id).innerHTML.replace(""));
+                       document.getElementById('count'+id).innerHTML=parseInt(document.getElementById('count'+id).innerHTML)+1;          
+                       console.log(response);
+                   }
+               });
+
+            
+  }
+   function update_summer1(event,id){
+       event.preventDefault();
+
+       var add=12;
+            
+
+            $.ajax({
+               type: 'POST',
+               url: 'php/update_summer.php',
+               data: {id1:id,add:add},
+               success: function(response) {
+                   // console.log(document.getElementById('count'+id).innerHTML.replace(""));
+                   document.getElementById('count'+id).innerHTML=parseInt(document.getElementById('count'+id).innerHTML)+1;          
+                   console.log(response);
+               }
+           });
+
+            
   }
   $('#courseForm').submit(function(event) {
         event.preventDefault();

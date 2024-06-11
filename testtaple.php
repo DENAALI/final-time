@@ -80,6 +80,8 @@ for ($i = 1; $i <= 3; $i++) {
         $result_sub = $conn->query($select_sub);
 
         while ($sub = $result_sub->fetch_assoc()) {
+            if(str_starts_with($sub['name'],'Graduation'))
+            continue;
             $sql123 = "SELECT * FROM statistics";
             $result123 = $conn->query($sql123);
 
@@ -116,6 +118,7 @@ for ($i = 1; $i <= 3; $i++) {
                             'hour' => '',
                             'course_id' => $sub['subject_id'],
                             'semester' => $sub['semester'],
+                            'pre_sub' => $sub['pre_sub_num'],
                             'major_id' => $sub['major_id'],
                             'type' => $sub['type_name'],
                             'year' => $sub['year'],
@@ -133,6 +136,7 @@ for ($i = 1; $i <= 3; $i++) {
                         'day' => '', // يجب تحديد اليوم هنا
                         'hour' => '',
                         'course_id' => $sub['subject_id'],
+                        'pre_sub' => $sub['pre_sub_num'],
                         'semester' => $sub['semester'],
                         'major_id' => $sub['major_id'],
                         'type' => $sub['type_name'],
@@ -171,23 +175,19 @@ for ($i = 1; $i <= 3; $i++) {
                                             $schedual[$key]['day']=getDayBySection($section,$day34);
 
                                         }
-                                        if($labindex==0){
-
-                                            $schedual[$key]['hour']=$start;
+                                        while (hasTimeConflict($start, $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
                                             $index1++;
-                                            if(count($times)<=$index1){
-                                                $index1=0;
+                                            if (count($times) <= $index1) {
+                                                $index1 = 0;
                                             }
-                                            $start=$times[$index1];
-                                        
-                                        }else{
-                                            $schedual[$key]['hour']=$start;
-                                            $labindex++;
-                                            if(count($times)<=$labindex){
-                                                $labindex=0;
-                                            }
-                                            $start=$times[$labindex];
+                                            $start = $times[$index1];
                                         }
+                                        $schedual[$key]['hour'] = $start;
+                                        $index1++;
+                                        if (count($times) <= $index1) {
+                                            $index1 = 0;
+                                        }
+                                        $start = $times[$index1];
                                     }
                                 }
                             }
@@ -234,23 +234,19 @@ for ($i = 1; $i <= 3; $i++) {
                                             
 
                                         }
-                                        if($labindex==0){
-
-                                            $schedual[$key]['hour']=$start;
+                                        while (hasTimeConflict($start, $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
                                             $index1++;
-                                            if(count($times)<=$index1){
-                                                $index1=0;
+                                            if (count($times) <= $index1) {
+                                                $index1 = 0;
                                             }
-                                            $start=$times[$index1];
-                                        
-                                        }else{
-                                            $schedual[$key]['hour']=$start;
-                                            $labindex++;
-                                            if(count($times)<=$labindex){
-                                                $labindex=0;
-                                            }
-                                            $start=$times[$labindex];
+                                            $start = $times[$index1];
                                         }
+                                        $schedual[$key]['hour'] = $start;
+                                        $index1++;
+                                        if (count($times) <= $index1) {
+                                            $index1 = 0;
+                                        }
+                                        $start = $times[$index1];
         
                                     }
                                 }
@@ -281,23 +277,19 @@ for ($i = 1; $i <= 3; $i++) {
                                         }else{
 
 
-                                            if($labindex==0){
-
-                                            $schedual[$key]['hour']=$start;
+                                            while (hasTimeConflict($start, $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
+                                                $index1++;
+                                                if (count($times) <= $index1) {
+                                                    $index1 = 0;
+                                                }
+                                                $start = $times[$index1];
+                                            }
+                                            $schedual[$key]['hour'] = $start;
                                             $index1++;
-                                            if(count($times)<=$index1){
-                                                $index1=0;
+                                            if (count($times) <= $index1) {
+                                                $index1 = 0;
                                             }
-                                            $start=$times[$index1];
-                                        
-                                        }else{
-                                            $schedual[$key]['hour']=$start;
-                                            $labindex--;
-                                            if(count($times)<=$labindex){
-                                                $labindex=0;
-                                            }
-                                            $start=$times[$labindex];
-                                        }
+                                            $start = $times[$index1];
 
                                             
                                             // $schedual[$key]['day']='Sunday-Tuesday-Thursday';
@@ -314,7 +306,19 @@ for ($i = 1; $i <= 3; $i++) {
                     }
     }
 }
-
+function hasTimeConflict($time, $schedual, $pre_sub,$section,$subject_id) {
+    foreach ($schedual as $item) {
+        // $item_start_time = strtotime(explode('-', $item['hour'])[0]);
+        // $item_end_time = strtotime(explode('-', $item['hour'])[1]);
+        if ($item['pre_sub'] == $pre_sub && $item['pre_sub']==$subject_id && $section==$item['section']) {
+            if(str_starts_with($item['hour'],substr($time,0,2))){
+                echo substr($time,0,2);
+                return true;
+                }
+        }
+    }
+    return false;
+}
 // إظهار الجدول الزمني
 // for ($section = 1; $section <= $sections_needed; $section++) {
 //     $times = $time_1;
@@ -345,6 +349,7 @@ foreach ($schedule as $item) {
             // echo "<td>" . $item['course_id'] . "</td>";
             // echo "<td>" . $item['course_name'] . "</td>";
             // echo "<td>" . $item['section'] . "</td>";
+            // echo "<td>" . $item['pre_sub'] . "</td>";
             // echo "<td>" . $item['hour'] . "</td>";
             // echo "<td>" . $item['year'] . "</td>";
             // echo "<td>" . $item['day'] . "</td>";
@@ -407,7 +412,7 @@ if(isset($_POST['major1']))
 }
 
 // }
-echo "</table>";
+// echo "</table>";
 
 
 
@@ -469,6 +474,7 @@ function assignHall($courses, $halls) {
                     'day' => $course['day'],
                     'year' => $course['year'],
                     'hour' => $course['hour'],
+                    'pre_sub' => $course['pre_sub'],
                     'hall_name' => $hall['hall_name'],
                     'course_id' => $course['course_id'],
                     'course_name' => $course['course_name'],

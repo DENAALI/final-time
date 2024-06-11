@@ -91,18 +91,27 @@ if (isset($_POST['major1'])) {
 
     // Fetch teachers data
     $teachers = [];
-    $sqlTeachers = "SELECT id, name FROM teacher WHERE type != 'admin' AND (depar_num=$major_id)";
-    $teacher_result = $conn->query($sqlTeachers);
-   
-    while ($teacher_row = $teacher_result->fetch_assoc()) {
-        $teachers[$teacher_row['id']] = [
-            'name' => $teacher_row['name'],
-            'subjects' => 0,
-            'classes' => [],
-            'time1' => [],
-            'time2' => [],
-
-        ];
+    $selectteces="select * from tetches";
+    $resultteces=$conn->query($selectteces);
+    while($row=$resultteces->fetch_assoc()){
+        
+        $id=$row['techer_id'];
+        $sqlTeachers = "SELECT * FROM teacher WHERE type != 'admin'  and id='$id'  ";
+        $teacher_result = $conn->query($sqlTeachers);
+        // while ($teacher_row = $teacher_result->fetch_assoc()) {
+        if($teacher_result->num_rows!=0){
+            $teacher_row = $teacher_result->fetch_assoc();
+            if($row['techer_id']==$teacher_row['id']&&$teacher_row['active']=='yes'){
+           
+                $teachers[$teacher_row['id']] = [
+                    'name' => $teacher_row['name'],
+                    'sub_id' => $row['subject_id'],
+                    'subjects' => 0,
+                    'classes' => []
+                ];
+            }
+        }
+        // }
     }
     $sql = "SELECT * FROM summer WHERE course_id LIKE '$major%' ";
     $result = $conn->query($sql);
