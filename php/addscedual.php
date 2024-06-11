@@ -262,9 +262,10 @@ if (isset($_POST['major5'])) {
                 }
             }else{
                 // echo "<option selected value='".$row['techer']."'>".$row['techer']."</option>";
+                echo "<option selected value='" . $row['techer'] . "'>" . $row['techer'] . "</option>";
                 foreach ($teachers as $teacher_id => $teacher) {
                     if ($teacher['name'] == $row['techer']) {
-                        echo "<option selected value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
+                        echo "<option selected value='" . $row['techer'] . "'>" . $row['techer'] . "</option>";
                     } else {
                         // echo "<option value='" . $teacher['name'] . "'>" . $teacher['name'] . "</option>";
                     }

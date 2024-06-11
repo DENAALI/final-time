@@ -50,7 +50,7 @@ th {
               
                  <th rowspan="1">Day</th>
                 <th colspan="6">Sunday-Tuesday-Thursday</th>
-                
+                <th colspan="2">Sunday-Tuesday</th>
                 
                <th colspan="6">Monday-Wednesday</th>
                      
@@ -58,63 +58,73 @@ th {
             </tr>
             <tr>
                 <th rowspan="1">time</th>
-                <th>8_9</th>
-                <th>9_10</th>
-                <th>10_11</th>
-                <th>11_12</th>
-                <th>12_13</th>
-                <th>13_14</th>
-                
-                <th>8_9:30</th>
-                <th>9:30_11</th>
-                <th>11_12:30</th>
-                <th>12:30_14</th>
-                <th>14_15:30</th>
-                <th>15:30_17</th>
+                <th>8-9</th>
+                <th>9-10</th>
+                <th>10-11</th>
+                <th>11-12</th>
+                <th>12-13</th>
+                <th>13-14</th>
+                <th>14-15:30</th>
+                <th>15:30-17</th>
+                <th>8-9:30</th>
+                <th>9:30-11</th>
+                <th>11-12:30</th>
+                <th>12:30-14</th>
+                <th>14-15:30</th>
+                <th>15:30-17</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            // $servername = "your_server";
-            // $username = "your_username";
-            // $password = "your_password";
-            // $dbname = "your_database";
-
-            // // Create connection
-            // $conn = new mysqli($servername, $username, $password, $dbname);
+            <?php 
             include '../connect.php';
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT `id`, `subject_id`, `subject_name`, `section`, `techer`, `time`, `day`, `hall`, `student_num` FROM `schedule`";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>{}</td>";
-                    echo "<td>{$row['subject_name']}</td>";
-                    echo "<td>{$row['section']}</td>";
-                    echo "<td>{$row['techer']}</td>";
-                    echo "<td>{$row['time']}</td>";
-                    echo "<td>{$row['hall']}</td>";
-                    echo "<td>{$row['student_num']}</td>";
-                    echo "<td>{$row['subject_name']}</td>";
-                    echo "<td>{$row['section']}</td>";
-                    echo "<td>{$row['techer']}</td>";
-                    echo "<td>{$row['time']}</td>";
-                    echo "<td>{$row['hall']}</td>";
-                    echo "<td>{$row['student_num']}</td>";
-                    echo "</tr>";
+            $tims=[
+                '8_9',
+                '9_10',
+                '10_11',
+                '11_12',
+                '12_13',
+                '13_14',
+                '14-15:30',
+                '15:30-17',
+                '8-9:30',
+                '9:30_11',
+                '11_12:30',
+                '12:30_14',
+                '14_15:30',
+                '15:30_17',
+                ];
+            $select='SELECT * FROM `schedule` GROUP by techer'; 
+            
+            $result=mysqli_query($conn,$select);   
+            while($row=mysqli_fetch_assoc($result)){
+                if($row['techer']=='non'||$row['techer']==null)
+                continue;
+                echo "<tr>
+                <th rowspan='1'>".$row['techer']."</th>";
+                foreach($tims as $time){
+                    $select_all="SELECT * FROM `schedule` where time='".$time."' and techer= '".$row['techer']."'"; 
+                    $all_result=$conn->query($select_all);
+                    if($all_result->num_rows != 0){
+                        $all_row=mysqli_fetch_assoc($all_result);
+                        if(isset($all_row['techer'])){
+                            if($all_row['techer']==$row['techer']&&$all_row['time']==$time){
+                                echo "<td>".$all_row['subject_name'].'---('.$all_row['hall'].")</td>";
+                            }else{
+                                echo "<td></td>";
+                            }
+                        }else{
+                            echo "<td></td>";
+                        }
+                    // $all_result=$conn->query($select_all);
+                    }else{
+                        echo "<td></td>";
+                    }
+                    // }
                 }
-            } else {
-                echo "<tr><td colspan='13'>No data found</td></tr>";
+                echo "</tr>";
             }
-
-            $conn->close();
             ?>
+            
         </tbody>
     </table>
  <script>

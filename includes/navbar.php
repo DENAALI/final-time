@@ -93,6 +93,12 @@ $type = $_SESSION['type'];
     <span>Create Table</span>
   </a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="php/Table.php">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    <span>teacher table</span>
+  </a>
+</li>
 
 <?php } ?>
 

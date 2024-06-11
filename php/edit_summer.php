@@ -103,7 +103,7 @@ $student_count = 0;
             $pre_sub=$subgect_result->fetch_assoc()['pre_sub_num'];
             if(strlen($sub['subject_num'])!=7)
             continue;
-            $j=intval(substr($sub['subject_num'],5,1));
+            $j=intval(substr($sub['subject_num'],4,1));
             $major_id=0;
             foreach($majors as $key => $major) {
                 if(substr($sub['subject_num'],0,3)==$major){
@@ -181,29 +181,12 @@ $student_count = 0;
                                     if($item['type']=='laboratory'){
                                         if($j==1||$j==2){
 
-                                            $schedual[$key]['day']='Monday-Wednesday';
-                                        }else{
                                             $schedual[$key]['day']="Sunday-Tuesday";
+                                            }else{
+                                            $schedual[$key]['day']='Monday-Wednesday';
 
                                         }
-                                        // if($labindex==0){
 
-                                        //     $schedual[$key]['hour']=$start;
-                                        //     $index1++;
-                                        //     if(count($times)<=$index1){
-                                        //         $index1=0;
-                                        //     }
-                                        //     $start=$times[$index1];
-                                        
-                                        // }else{
-                                        //     $schedual[$key]['hour']=$start;
-                                        //     $labindex++;
-                                        //     if(count($times)<=$labindex){
-                                        //         $labindex=0;
-                                        //     }
-                                        //     $start=$times[$labindex];
-                                        // }
-                                        
                                         while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
                                             $index1++;
                                             if (count($times) <= $index1) {

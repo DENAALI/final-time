@@ -200,6 +200,7 @@ while ($row = $result->fetch_assoc()) {
         </tbody>
     </table>
 </form>
+<button id="delete"  class="btn btn-primary "> Delete last generate </button>
     </div>
 </div>
   </div>
@@ -268,8 +269,14 @@ while ($row = $result->fetch_assoc()) {
        $("#create").submit();
        
    });
+   $("#delete").click(function(){
+//    $("#delete").preventDefault();
+    window.location.href='php/delete.php';
+      
+       
+   });
    $("#btnnext1").click(function(){
-       $("#next1").submit();
+       window.location.href='php/delete.php';
        
    });
 
