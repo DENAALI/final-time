@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<?php 
+include('includes/header.php'); 
+include('includes/navbar.php'); 
+?>
 <head>
     <meta charset="UTF-8">
     
     
     <title>teacher Table</title>
 <style>
-
 
 button {
     padding: 10px;
@@ -25,6 +27,7 @@ th, td {
        width: 20px;
       height: 50px; 
     text-align: center;
+    color: black;
 }
 
 th {
@@ -41,7 +44,7 @@ th {
 </style>
 </head>
 <body>
-<h1><img src="../Picture1.png" width="90" height="90"> teacher table </h1>
+<h1><img src="Picture1.png" width="90" height="90"> teacher table </h1>
  <button id="backButton" style="float: left;">Back</button>
     <button id="exportButton" style="float: left;">Export to Excel</button>
     <table>
@@ -76,7 +79,7 @@ th {
         </thead>
         <tbody>
             <?php 
-            include '../connect.php';
+            include 'connect.php';
             $tims=[
                 '8_9',
                 '9_10',
@@ -133,9 +136,36 @@ document.getElementById('backButton').addEventListener('click', function() {
 });
 
 document.getElementById('exportButton').addEventListener('click', function() {
-    // Replace the following line with your actual export to Excel logic
-    alert('Exporting to Excel...');
-});
+            exportTableToExcel('teacherTable', 'teacher_schedule');
+        });
+
+        function exportTableToExcel(tableID, filename = ''){
+            var downloadLink;
+            var dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+            
+            // Create a new Blob with the tableHTML
+            var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+
+            // Create a link element
+            downloadLink = document.createElement("a");
+
+            // Set the file name
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+            // Create a link to the file
+            downloadLink.href = URL.createObjectURL(blob);
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            // Triggering the function
+            downloadLink.click();
+        }
 </script>
 </body>
-</html>
+<?php
+include('includes/scripts.php');
+include('includes/footer.php');
+?>
