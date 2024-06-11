@@ -1,4 +1,11 @@
+<?php
+session_start();
+if ($_SESSION['teacher_id'] ==null)
+{
+  header('Location:login.php');
+}
 
+?>
 <?php 
 include('includes/header.php'); 
 include('includes/navbar.php'); 
