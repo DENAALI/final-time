@@ -36,12 +36,11 @@ function getDayBySection($section, $days) {
 }
 
 $time_1 = [
-
     '10_11',
     '11_12',
     '12_13',
     '13_14',
- 
+
 ];
 
 $time_2 = [
@@ -219,7 +218,7 @@ for ($i = 1; $i <= 3; $i++) {
                             
                             foreach ($schedual as $key => $item) {
                                 
-                                if($item['semester']==$semester&&str_starts_with($item['course_id'],$subject_id)&&$item['major_id']==$i&&$item['year']==$j&&$section==$item['section']){
+                                if($item['semester']==$semester&&str_starts_with($item['course_id'],$subject_id)&&$item['year']==$j&&$section==$item['section']){
                                     if($item['type']!='laboratory'){
     
                                         // $index++;
@@ -270,7 +269,7 @@ for ($i = 1; $i <= 3; $i++) {
                             $index=$section-1;
                             foreach ($schedual as $key => $item) {
     
-                                if($item['semester']==$semester&&str_starts_with($item['course_id'],$subject_id)&&$item['major_id']==$i&&$item['year']==$j&&$section==$item['section']){
+                                if($item['semester']==$semester&&str_starts_with($item['course_id'],$subject_id)&&$item['year']==$j&&$section==$item['section']){
                                     if($item['type']!='laboratory'){
     
                                         if($j==1||$j==2){
@@ -310,11 +309,13 @@ function hasTimeConflict($time, $schedual, $pre_sub,$section,$subject_id) {
     foreach ($schedual as $item) {
         // $item_start_time = strtotime(explode('-', $item['hour'])[0]);
         // $item_end_time = strtotime(explode('-', $item['hour'])[1]);
-        if ($item['pre_sub'] == $pre_sub && $item['pre_sub']==$subject_id && $section==$item['section']) {
-            if(str_starts_with($item['hour'],substr($time,0,2))){
-                echo substr($time,0,2);
-                return true;
-                }
+        if ($item['pre_sub'] == $pre_sub  &&$item['hour']==$time&& $section==$item['section']&&$subject_id!=$item['course_id']) {
+            // echo substr($time,0,2);
+            // if($item['pre_sub']==$subject_id)
+            return true;
+            // if(str_starts_with($item['hour'],substr($time,0,2))){
+ 
+                // }
         }
     }
     return false;
@@ -339,7 +340,7 @@ $schedule = assignHall($schedual, $halls);
 //  echo "</tr>";
 $select="select * from schedule ";
 $res=$conn->query($select);
-if($res->num_rows<=0)
+// if($res->num_rows<=0)
 foreach ($schedule as $item) {
     // if($item['semester']==$semester&&$item['major_id']==1&&$item['year']==2) {
         // if($item['type']!='laboratory'&&$item['section']==1){

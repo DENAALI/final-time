@@ -55,23 +55,21 @@ $time_slots_lab = [
 ];
 $time_1 = [
 
-   '10:30-11:45',
-'11:45-13:00',
+    '10:30-11:45',
+    '11:45-13:00',
 '13:00-14:15',
 '14:15-15:30',
-
-'08:00-09:15',
-'09:15-10:30',
+// '08:00-09:15',
+// '09:15-10:30',
 ];
 
 $time_2 = [
-//    '08:00-09:30',
-
-'12:30-14:00',
-'14:00-15:30',
-
+'08:00-09:30',
+'09:00-10:30',
 '09:30-11:00',
-'11:00-12:30',
+// '12:30-14:00',
+// '14:00-15:30',
+// '11:00-12:30',
 ];
 $time_3 = [
     '8-9:30',
@@ -105,7 +103,7 @@ $student_count = 0;
             $pre_sub=$subgect_result->fetch_assoc()['pre_sub_num'];
             if(strlen($sub['subject_num'])!=7)
             continue;
-            $j=intval(substr($sub['subject_num'],4,1));
+            $j=intval(substr($sub['subject_num'],5,1));
             $major_id=0;
             foreach($majors as $key => $major) {
                 if(substr($sub['subject_num'],0,3)==$major){
@@ -179,13 +177,13 @@ $student_count = 0;
                         }
                             foreach ($schedual as $key => $item) {
                                 
-                                if($item['year']==$j&&$section==$item['section']&&$item['major_id']==$major_id&&$item['year']==$j&&str_starts_with($item['course_id'],$subject_id)){
+                                if($item['year']==$j&&$section==$item['section']&&$item['major_id']==$major_id&&str_starts_with($item['course_id'],$subject_id)){
                                     if($item['type']=='laboratory'){
                                         if($j==1||$j==2){
 
                                             $schedual[$key]['day']='Monday-Wednesday';
                                         }else{
-                                            $schedual[$key]['day']="Monday-Wednesday";
+                                            $schedual[$key]['day']="Sunday-Tuesday";
 
                                         }
                                         // if($labindex==0){
@@ -206,7 +204,7 @@ $student_count = 0;
                                         //     $start=$times[$labindex];
                                         // }
                                         
-                                        while (hasTimeConflict($start, $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
+                                        while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
                                             $index1++;
                                             if (count($times) <= $index1) {
                                                 $index1 = 0;
@@ -248,7 +246,7 @@ $student_count = 0;
                                         $course_duration = 75 * 60;
                                         $start_time = strtotime(explode('-', $start)[0]);
                                         $end_time = $start_time + $course_duration;
-                                        while (hasTimeConflict($start, $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
+                                        while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
                                             $index1++;
                                             if (count($times) <= $index1) {
                                                 $index1 = 0;
@@ -302,11 +300,17 @@ $student_count = 0;
     
 // }
 // Function to check time conflict
-function hasTimeConflict($time, $schedual, $pre_sub,$section,$subject_id) {
+function hasTimeConflict($time,$type, $schedual, $pre_sub,$section,$subject_id) {
     foreach ($schedual as $item) {
         // $item_start_time = strtotime(explode('-', $item['hour'])[0]);
         // $item_end_time = strtotime(explode('-', $item['hour'])[1]);
+        // return true;
+       
         if ($item['pre_sub'] == $pre_sub && $item['hour'] == $time&&$section==$item['section']&&$item['course_id']!=$subject_id) {
+            // if($type=='laboratory')
+            // {
+            //     if(){}
+            // }
             return true;
         }
     }
@@ -319,41 +323,41 @@ function hasTimeConflict($time, $schedual, $pre_sub,$section,$subject_id) {
 
 $schedule = assignHall($schedual, $halls);
  $schedule;
-//  echo "<table border=1 style='padding: 5;
-//     text-align: center;' >";
-//  echo "<tr>";
-//  echo "<th>Subject ID</th>";
-//  echo "<th>Name</th>";
-//  echo "<th>Section</th>";
+ echo "<table border=1 style='padding: 5;
+    text-align: center;' >";
+ echo "<tr>";
+ echo "<th>Subject ID</th>";
+ echo "<th>Name</th>";
+ echo "<th>Section</th>";
 //  echo "<th>pre_sub</th>";
-//  echo "<th>Hour</th>";
-//  echo "<th>year</th>";
-//  echo "<th>Day</th>";
-//  echo "<th>Hall</th>";
-//  echo "<th>Student numper</th>";
-//  echo "</tr>";
-// $select="select * from schedule ";
-// $res=$conn->query($select);
+ echo "<th>Hour</th>";
+ echo "<th>year</th>";
+ echo "<th>Day</th>";
+ echo "<th>Hall</th>";
+ echo "<th>Student numper</th>";
+ echo "</tr>";
+$select="select * from schedule ";
+$res=$conn->query($select);
 // if($res->num_rows<=0)
 foreach ($schedule as $item) {
     // if($item['semester']==$semester&&$item['major_id']==1&&$item['year']==2) {
         // if($item['type']!='laboratory'&&$item['section']==1){
         if(true){
 
-            // echo "<tr>";
-            // echo "<td>" . $item['course_id'] . "</td>";
-            // echo "<td>" . $item['course_name'] . "</td>";
-            // echo "<td>" . $item['section'] . "</td>";
-            // echo "<td>" . $item['pre_sub'] . "</td>";
-            // echo "<td>" . $item['hour'] . "</td>";
-            // echo "<td>" . $item['year'] . "</td>";
-            // echo "<td>" . $item['day'] . "</td>";
-            // echo "<td>" . $item['hall_name'] . "</td>";
-            // echo "<td>" . $item['students_count'] . "</td>";
-            // echo "</tr>";
+            echo "<tr>";
+            echo "<td>" . $item['course_id'] . "</td>";
+            echo "<td>" . $item['course_name'] . "</td>";
+            echo "<td>" . $item['section'] . "</td>";
+            echo "<td>" . $item['pre_sub'] . "</td>";
+            echo "<td>" . $item['hour'] . "</td>";
+            echo "<td>" . $item['year'] . "</td>";
+            echo "<td>" . $item['day'] . "</td>";
+            echo "<td>" . $item['hall_name'] . "</td>";
+            echo "<td>" . $item['students_count'] . "</td>";
+            echo "</tr>";
         }   
 }
-// echo "</table>";
+echo "</table>";
 // $day=$item['day'];
 // $Hour=$item['hour'];
 // $Hall=$item['hall_name'];
@@ -564,6 +568,7 @@ function assignHall($courses, $halls) {
                 'day' => $course['day'],
                 'year' => $course['year'],
                 'hour' => $course['hour'],
+                'pre_sub' => $course['pre_sub'],
                 'hall_name' => '',
                 'course_id' => $course['course_id'],
                 'course_name' => $course['course_name'],
