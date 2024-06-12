@@ -38,6 +38,7 @@ th, td {
 }
 
 th {
+    color: white;
     background-color: #4e73df;
 }
  h1 img {
