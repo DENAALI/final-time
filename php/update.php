@@ -193,7 +193,7 @@ if (isset($_POST['id1'])) {
                     }
                 }
                 }else{
-                    foreach($halls['laboratory']as  $hall){
+                    foreach($halls['theoretical']as  $hall){
 
                         $lasttime=$sections[count($sections)-1]['time'];
                         $index = array_search($lasttime, $time_1);

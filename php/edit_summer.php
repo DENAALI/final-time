@@ -122,24 +122,47 @@ $student_count = 0;
                 $sections_needed = ceil($student_count / 50);
                 // echo $student_count.'   ';
                 $remaining_students = $student_count;
+                $sql12 = "SELECT * FROM `tims`  where `course id`=".$sub['subject_num']."  ORDER BY `section` ASC";
+                $tims_result=$conn->query($sql12);
+                if($tims_result->num_rows == 0)
+                continue;
+                $section_count=$tims_result->num_rows;
+                
                 
                 // تحديد الأوقات لكل شعبة
                 for ($section = 1; $section <= $sections_needed; $section++) {
-                    // اختيار الجدول الزمني المناسب لكل قسم
-                    $times = $time_1;
-                    // تخصيص جدول زمني لكل مادة
-                    // foreach ($times as $index => $time) {
-                        if ($remaining_students <= 0) break;
+                    $row=$tims_result->fetch_assoc();
+                    
+                    if($sections_needed>$section_count&&$section==1){
                         $schedual[] = [
-                            'day' => '', // يجب تحديد اليوم هنا
-                            'hour' => '',
+                            'day' => $row['day'], // يجب تحديد اليوم هنا
+                            'hour' => $row['hour'],
                             'course_id' => $sub['subject_num'],
                             'pre_sub' =>$pre_sub ,
                             'major_id' => $major_id,
                             'type' => $sub['subject_type'],
                             'year' => $j,
                             'course_name' => $sub['subject_name'],
-                            'section' => $section,
+                            'section' => $sections_needed,
+                            'students_count' => min($remaining_students, 50),
+                        ];
+                        $remaining_students -= 50;
+                    }
+                    // اختيار الجدول الزمني المناسب لكل قسم
+                    $times = $time_1;
+                    // تخصيص جدول زمني لكل مادة
+                    // foreach ($times as $index => $time) {
+                        if ($remaining_students <= 0) break;
+                        $schedual[] = [
+                            'day' => $row['day'], // يجب تحديد اليوم هنا
+                            'hour' => $row['hour'],
+                            'course_id' => $sub['subject_num'],
+                            'pre_sub' =>$pre_sub ,
+                            'major_id' => $major_id,
+                            'type' => $sub['subject_type'],
+                            'year' => $j,
+                            'course_name' => $sub['subject_name'],
+                            'section' => $row['section'],
                             'students_count' => min($remaining_students, 50),
                         ];
 
@@ -187,19 +210,19 @@ $student_count = 0;
 
                                         }
 
-                                        while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
-                                            $index1++;
-                                            if (count($times) <= $index1) {
-                                                $index1 = 0;
-                                            }
-                                            $start = $times[$index1];
-                                        }
-                                        $schedual[$key]['hour'] = $start;
-                                        $index1++;
-                                        if (count($times) <= $index1) {
-                                            $index1 = 0;
-                                        }
-                                        $start = $times[$index1];
+                                        // while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
+                                        //     $index1++;
+                                        //     if (count($times) <= $index1) {
+                                        //         $index1 = 0;
+                                        //     }
+                                        //     $start = $times[$index1];
+                                        // }
+                                        // $schedual[$key]['hour'] = $start;
+                                        // $index1++;
+                                        // if (count($times) <= $index1) {
+                                        //     $index1 = 0;
+                                        // }
+                                        // $start = $times[$index1];
                                     }
                                 }
                             }
@@ -229,20 +252,20 @@ $student_count = 0;
                                         $course_duration = 75 * 60;
                                         $start_time = strtotime(explode('-', $start)[0]);
                                         $end_time = $start_time + $course_duration;
-                                        while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
-                                            $index1++;
-                                            if (count($times) <= $index1) {
-                                                $index1 = 0;
-                                            }
-                                            $start = $times[$index1];
-                                        }
-                                        $schedual[$key]['hour'] = $start;
-                                        $schedual[$key]['day']='Sunday-Monday-Tuesday-Wednesday';
-                                        $index1++;
-                                        if (count($times) <= $index1) {
-                                            $index1 = 0;
-                                        }
-                                        $start = $times[$index1];
+                                        // while (hasTimeConflict($start,$item['type'], $schedual, $item['pre_sub'],$item['section'],$item['course_id'])) {
+                                        //     $index1++;
+                                        //     if (count($times) <= $index1) {
+                                        //         $index1 = 0;
+                                        //     }
+                                        //     $start = $times[$index1];
+                                        // }
+                                        // $schedual[$key]['hour'] = $start;
+                                        // $schedual[$key]['day']='Sunday-Monday-Tuesday-Wednesday';
+                                        // $index1++;
+                                        // if (count($times) <= $index1) {
+                                        //     $index1 = 0;
+                                        // }
+                                        // $start = $times[$index1];
 
                                         // foreach ($schedual as $key => $item1) {
                                         //     if($start==$item1['hour']&&$item['pre_sub']==$item1['pre_sub']&&$item['section']==$item['section']){
@@ -331,7 +354,7 @@ foreach ($schedule as $item) {
             echo "<td>" . $item['course_id'] . "</td>";
             echo "<td>" . $item['course_name'] . "</td>";
             echo "<td>" . $item['section'] . "</td>";
-            echo "<td>" . $item['pre_sub'] . "</td>";
+            // echo "<td>" . $item['pre_sub'] . "</td>";
             echo "<td>" . $item['hour'] . "</td>";
             echo "<td>" . $item['year'] . "</td>";
             echo "<td>" . $item['day'] . "</td>";
